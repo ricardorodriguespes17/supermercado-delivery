@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -18,53 +19,44 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Supermercado;
 import model.Usuario;
-import static principal.Principal.root;
 
 public class LoginController implements Initializable {
 
+    @FXML
+    private TextField username;
+    @FXML
+    private PasswordField password;
+    @FXML
+    private Label alert;
+
     public static Usuario uN;
+    private Parent root = Principal.root;
 
-    //Campo de texto para colocar o nome do usuario
-    @FXML
-    private TextField userName;
-    //Campo de Senha para colocar a senha
-    @FXML
-    private PasswordField senha;
-    //Rotulo para colocar texto que indica erro login
-    @FXML
-    private Label erros;
-
-    //Metodo que loga no conta do cliente ou administrador, dependendo do tipo recebido
-    public void loginAceito(String tipo, String userName) {
-        for(Usuario u : Supermercado.getUsers()){
-            if(userName.equals(u.getUserName())){
-                uN = u;
+    public void loginAceito(String type, String userName) {
+        for (Usuario user : Supermercado.getUsers()) {
+            if (userName.equals(user.getUserName())) {
+                uN = user;
             }
         }
-        switch (tipo) {
-            //caso seja tipo admin, loga na tela do admnistrador
+        switch (type) {
             case "admin":
                 try {
-                    Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
-                    Scene cena1 = new Scene(root);
-                    Principal.palco.setScene(cena1);
+                    root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
+                    Scene scene = new Scene(root);
+                    Principal.palco.setScene(scene);
                     Principal.palco.show();
-                    //Colocar palco no centro da tela
                     Principal.palco.centerOnScreen();
                     return;
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            //caso seja tipo cliente, loga na tela do cliente
             case "cliente":
-
                 try {
-                    Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
-                    Scene cena2 = new Scene(root);
-                    Principal.palco.setScene(cena2);
+                    root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
+                    Scene scene = new Scene(root);
+                    Principal.palco.setScene(scene);
                     Principal.palco.setTitle(userName);
                     Principal.palco.show();
-                    //Colocar palco no centro da tela
                     Principal.palco.centerOnScreen();
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,11 +64,10 @@ public class LoginController implements Initializable {
                 return;
             case "entregador":
                 try {
-                    Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
-                    Scene cena3 = new Scene(root);
-                    Principal.palco.setScene(cena3);
+                    root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
+                    Scene scene = new Scene(root);
+                    Principal.palco.setScene(scene);
                     Principal.palco.show();
-                    //Colocar palco no centro da tela
                     Principal.palco.centerOnScreen();
                     return;
                 } catch (IOException ex) {
@@ -85,98 +76,96 @@ public class LoginController implements Initializable {
             default:
                 break;
         }
-
     }
 
-    //Metodo que confirma o login quando o usuário clica no botão 'entrar'
     @FXML
-    public void entrar() throws IOException, InterruptedException {
-        String u, s;
-        u = userName.getText();
-        s = senha.getText();
+    public void enter() throws IOException, InterruptedException {
+        String usernameText = username.getText();
+        String passwordText = password.getText();
+
+        if (!validFields()) {
+            return;
+        }
+
         for (Usuario user : Supermercado.getUsers()) {
-            if (user.getUserName().equals(u)) {
-                if (user.getSenha().equals(s)) {
+            if (user.getUserName().equals(usernameText)) {
+                if (user.getSenha().equals(passwordText)) {
                     loginAceito(user.getTipo(), user.getUserName());
                     return;
                 } else {
-                    erros.setText("Senha incorreta");
-                    limpar();
+                    alert.setText("Senha incorreta");
+                    clearPassword();
                     return;
                 }
             } else {
-                erros.setText("Usuário não existe");
-                limpar();
+                alert.setText("Usuário não existe");
+                clearUsername();
             }
         }
     }
 
-    //Metodo que confirma o login quando o usuário pressiona a tecla ENTER
     @FXML
-    public void entrarKey(KeyEvent event) throws IOException, InterruptedException {
-        if (event.getCode().equals(KeyCode.ENTER) && !"".equals(userName.getText()) && !"".equals(senha.getText())) {
-            String u, s;
-            u = userName.getText();
-            s = senha.getText();
-            for (Usuario user : Supermercado.getUsers()) {
-                if (user.getUserName().equals(u)) {
-                    if (user.getSenha().equals(s)) {
-                        loginAceito(user.getTipo(), user.getUserName());
-                        return;
-                    } else {
-                        erros.setText("Senha incorreta");
-                        limpar();
-                        return;
-                    }
-                } else {
-                    erros.setText("Usuário não existe");
-                    limpar();
-                }
-            }
+    public void enterKey(KeyEvent event) throws IOException, InterruptedException {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            enter();
+        }
+    }
+
+    public boolean validFields() {
+        String usernameText = username.getText();
+        String passwordText = password.getText();
+
+        if (usernameText == "") {
+            alert.setText("Informe o nome de usuário");
+            clearUsername();
+            return false;
         }
 
+        if (passwordText == "") {
+            alert.setText("Informe a senha");
+            clearUsername();
+            return false;
+        }
+
+        return true;
     }
 
-    //Metodo que abre a opção de criar uma nova conta, quando o usuario clica no botão 'Criar conta'
     @FXML
-    public void criarConta(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/CriarConta.fxml"));
-        Scene cena2 = new Scene(root);
-        Principal.palco.setScene(cena2);
+    public void createAccount(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/view/CriarConta.fxml"));
+        Scene scene = new Scene(root);
+        Principal.palco.setScene(scene);
         Principal.palco.show();
-        //Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
     @FXML
-    public void esqueceuSenha(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/RedefinirSenha.fxml"));
-        Scene cena2 = new Scene(root);
-        Principal.palco.setScene(cena2);
+    public void forgotPassword(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/view/RedefinirSenha.fxml"));
+        Scene scene = new Scene(root);
+        Principal.palco.setScene(scene);
         Principal.palco.show();
-        //Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
-    //Metodo que limpa as caixas de texto da tela
-    public void limpar() {
-        senha.setText("");
-        userName.setText("");
+    public void clearUsername() {
+        username.setText("");
     }
 
-    //Limpa o rotulo de erro da tela
-    @FXML
-    private void limparCampo(KeyEvent event) {
-        erros.setText("");
+    public void clearPassword() {
+        password.setText("");
     }
 
-    //Fecha o palco do programa, assim encerrando a execussão
     @FXML
-    private void sair(ActionEvent event) {
+    private void clearAlert(KeyEvent event) {
+        alert.setText("");
+    }
+
+    @FXML
+    private void closeApp(ActionEvent event) {
         Principal.palco.close();
     }
 
-    //Metodo inicial da tela
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

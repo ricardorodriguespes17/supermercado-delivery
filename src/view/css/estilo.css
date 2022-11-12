@@ -1,0 +1,72 @@
+BorderPane{
+    PRIMARY_COLOR: #00ff9a;
+    SECONDARY_COLOR: #ffffff;
+
+    LABEL_COLOR: #000;
+    -fx-pref-width: 800;
+    -fx-pref-height: 600;
+    -fx-background-color: SECONDARY_COLOR;
+}
+
+.header, .footer {
+    -fx-background-color: PRIMARY_COLOR;
+    -fx-pref-width: 800;
+    -fx-pref-height: 70;
+}
+
+.header HBox {
+    -fx-pref-width: 400;
+    -fx-padding: 0 10 0 10;
+}
+
+.header .title {
+    -fx-font-size: 24;
+}
+
+.header HBox Button {
+    -fx-pref-width: 150;
+}
+
+.content {
+    -fx-background-color: SECONDARY_COLOR;
+    -fx-text-fill: LABEL_COLOR;
+}
+
+.content Label {
+    -fx-text-fill: LABEL_COLOR;
+}
+
+Button {
+    -fx-pref-width: 200;
+    -fx-pref-height: 35;
+    -fx-font-size: 16;
+}
+
+.primary-button{
+    -fx-background-color: PRIMARY_COLOR;
+    -fx-border-color: PRIMARY_COLOR;
+}
+
+.secondary-button{
+    -fx-background-color: SECONDARY_COLOR;
+    -fx-border-color: SECONDARY_COLOR;
+}
+
+TextField, PasswordField {
+    -fx-pref-width: 200;
+    -fx-min-width: 200;
+    -fx-max-width: 200;
+    -fx-pref-height: 40;
+    -fx-background-color: SECONDARY_COLOR;
+    -fx-border-color: PRIMARY_COLOR;
+}
+
+.input-outline{
+    -fx-border-color: SECONDARY_COLOR;
+}
+
+.label-warning {
+    -fx-text-fill: PRIMARY_COLOR;
+    -fx-pref-width: 200;
+    -fx-pref-height: 40;
+}
