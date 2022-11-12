@@ -1,0 +1,24 @@
+.botao1{
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #FFFFFF;
+}
+
+.botao2{
+    -fx-background-color: #00FF9A;
+    -fx-border-color: #00FF9A;
+}
+
+.campo{
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #00FF9A;
+}
+
+.campo2{
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #FFFFFF;
+}
+
+.tela{
+    -fx-pref-tile-width: 800;
+    -fx-pref-tile-height: 600;
+}

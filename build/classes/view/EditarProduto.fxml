@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.supermercado.EditarProdutoController">
+   <children>
+      <BorderPane layoutX="162.0" layoutY="79.0" prefHeight="500.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <ToolBar prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #00FF9A;" BorderPane.alignment="CENTER">
+               <items>
+                  <Label text="Editar Produto">
+                     <font>
+                        <Font name="Source Sans Pro" size="18.0" />
+                     </font>
+                  </Label>
+               </items>
+            </ToolBar>
+         </top>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #00FF9A;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#confirmar" prefWidth="150.0" styleClass="botao1" text="Confirmar">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#cancelar" prefWidth="150.0" styleClass="botao1" text="Cancelar edição">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="100.0" prefWidth="400.0">
+                           <children>
+                              <Label text="Nome">
+                                 <font>
+                                    <Font name="Source Sans Pro" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="nome" prefHeight="25.0" prefWidth="140.0" promptText="Nome do Produto" styleClass="campo">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Source Sans Pro" size="12.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="100.0" prefWidth="400.0">
+                           <children>
+                              <Label text="Marca">
+                                 <font>
+                                    <Font name="Source Sans Pro" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="marca" prefHeight="25.0" prefWidth="140.0" promptText="Marca do Produto" styleClass="campo">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Source Sans Pro" size="12.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox minWidth="400.0" prefHeight="100.0" prefWidth="400.0">
+                           <children>
+                              <Label text="Peso">
+                                 <font>
+                                    <Font name="Source Sans Pro" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="peso" prefHeight="25.0" prefWidth="140.0" promptText="Peso do Produto" styleClass="campo">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Source Sans Pro" size="12.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox minWidth="400.0" prefHeight="100.0" prefWidth="400.0">
+                           <children>
+                              <Label text="Valor">
+                                 <font>
+                                    <Font name="Source Sans Pro" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="valor" onKeyReleased="#valorCorreto" prefHeight="25.0" prefWidth="200.0" promptText="Valor do Produto" styleClass="campo">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Source Sans Pro" size="12.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="92.0" prefWidth="300.0">
+                           <children>
+                              <Label text="Imagem">
+                                 <font>
+                                    <Font name="Source Sans Pro" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="confirmar1" mnemonicParsing="false" onAction="#adicionarImagem" prefWidth="150.0" styleClass="botao2" text="Adicionar Imagem...">
+                                 <VBox.margin>
+                                    <Insets right="50.0" />
+                                 </VBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Source Sans Pro" size="12.0" />
+                                 </font>
+                              </Button>
+                              <ImageView fx:id="imagem" fitHeight="150.0" fitWidth="150.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="NONE" />
+                                 </cursor>
+                                 <image>
+                                    <Image url="@../imagens/semimagem.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="92.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Quantidade">
+                                 <font>
+                                    <Font name="Source Sans Pro" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <Spinner fx:id="quant" prefHeight="25.0" prefWidth="60.0" styleClass="campo">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Spinner>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="400.0">
+                           <children>
+                              <Label text="Descrição">
+                                 <font>
+                                    <Font name="Source Sans Pro" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="descricao" prefHeight="200.0" prefWidth="200.0" promptText="Descrição do Produto" styleClass="campo">
+                                 <font>
+                                    <Font name="Source Sans Pro" size="14.0" />
+                                 </font>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="95.0" prefWidth="600.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
