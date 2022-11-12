@@ -17,7 +17,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Notificacao;
 import model.Pedidos;
-import model.Produto;
 import model.Supermercado;
 import model.Usuario;
 import principal.Principal;
@@ -42,7 +41,7 @@ public class PedidosController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -57,8 +56,8 @@ public class PedidosController implements Initializable {
             }
         }
 
-        //Mandar notificação para o usuario
-        Notificacao notificarCliente = new Notificacao("Pedido confirmado", selectedItem.getUser());
+        // Mandar notificação para o usuario
+        new Notificacao("Pedido confirmado", selectedItem.getUser());
         for (Usuario u : Supermercado.getUsers()) {
             if ("entregador".equals(u.getTipo())) {
                 Notificacao notificarEntregador = new Notificacao("Um pedido para ser entregue", u);
@@ -73,7 +72,7 @@ public class PedidosController implements Initializable {
         confirmacao.setResult(ButtonType.OK);
         confirmacao.showAndWait();
 
-        //Atualizar tabela
+        // Atualizar tabela
         carregarTabela();
     }
 
@@ -82,14 +81,11 @@ public class PedidosController implements Initializable {
         Pedidos selectedItem = tabela.getSelectionModel().getSelectedItem();
         for (Usuario u : Supermercado.getUsers()) {
             if (u.getNome().equals(selectedItem.getUsuario())) {
-                for (Produto p : u.getCarrinho().getProdutosSolicitados()) {
-                    u.getCarrinho().getProdutosSolicitados().clear();
-                    break;
-                }
+                u.getCarrinho().getProdutosSolicitados().clear();
             }
         }
 
-        //Mandar notificação para o usuario
+        // Mandar notificação para o usuario
         Notificacao n = new Notificacao("Pedido cancelado", selectedItem.getUser());
         selectedItem.getUser().getNotificacoes().add(n);
 
@@ -119,7 +115,7 @@ public class PedidosController implements Initializable {
 
         tabela.setItems(observable);
 
-        //Formatando fonte da tabela
+        // Formatando fonte da tabela
         tabela.setStyle("-fx-font-size: 12px; -fx-font-family: Source Sans Pro Extra Light;");
 
         for (Pedidos p : Supermercado.getPedidos()) {

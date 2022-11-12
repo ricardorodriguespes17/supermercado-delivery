@@ -45,12 +45,12 @@ public class EditarPerfilController implements Initializable {
 
     Usuario entregador;
 
-    //Declaração do selecionador de arquivo
+    // Declaração do selecionador de arquivo
     FileChooser fc = new FileChooser();
-    //Declaração e inicialização do arquivo onde irá receber o arquivo selecionado
+    // Declaração e inicialização do arquivo onde irá receber o arquivo selecionado
     File arquivoImagem = new File("src/imagens/usuario.png");
 
-    //Metodo que seleciona uma imagem em algum diretório do computador
+    // Metodo que seleciona uma imagem em algum diretório do computador
     @FXML
     private void adicionarImagem(ActionEvent event) {
         fc = new FileChooser();
@@ -92,7 +92,7 @@ public class EditarPerfilController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -175,14 +175,12 @@ public class EditarPerfilController implements Initializable {
 
     @FXML
     public void verificaSenha(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (senha.getText().equals("")) {
-                senha.setStyle("-fx-border-color: red;");
-                return;
-            } else {
-                erroSenha.setVisible(false);
-                senha.setStyle("-fx-border-color: #00FF9A;");
-            }
+        if (senha.getText().equals("")) {
+            senha.setStyle("-fx-border-color: red;");
+            return;
+        } else {
+            erroSenha.setVisible(false);
+            senha.setStyle("-fx-border-color: #00FF9A;");
         }
     }
 
@@ -192,14 +190,14 @@ public class EditarPerfilController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         for (Usuario u : Supermercado.getUsers()) {
-            if (u.getNome().equals(LoginController.uN)) {
+            if (u.getNome().equals(LoginController.uN.getNome())) {
                 entregador = u;
                 break;
             }

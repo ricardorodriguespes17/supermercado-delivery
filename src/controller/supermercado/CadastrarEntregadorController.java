@@ -38,15 +38,16 @@ public class CadastrarEntregadorController implements Initializable {
     @FXML
     private TextField nome, cpf, nomeUsuario, email, senha;
 
-    //Strings usadas no metodo 'confirmar()' para receber o valor dos Campos de texto e passar para os produto
+    // Strings usadas no metodo 'confirmar()' para receber o valor dos Campos de
+    // texto e passar para os produto
     private String nomeS, cpfS, nomeUsuarioS, emailS, senhaS;
 
-    //Declaração do selecionador de arquivo
+    // Declaração do selecionador de arquivo
     FileChooser fc = new FileChooser();
-    //Declaração e inicialização do arquivo onde irá receber o arquivo selecionado
+    // Declaração e inicialização do arquivo onde irá receber o arquivo selecionado
     File arquivoImagem = new File("src/imagens/usuario.png");
 
-    //Metodo que seleciona uma imagem em algum diretório do computador
+    // Metodo que seleciona uma imagem em algum diretório do computador
     @FXML
     private void adicionarImagem(ActionEvent event) {
         fc = new FileChooser();
@@ -73,7 +74,7 @@ public class CadastrarEntregadorController implements Initializable {
         emailS = email.getText();
         senhaS = senha.getText();
         cpfS = cpf.getText();
-        Usuario entregador = new Usuario(nomeS, nomeUsuarioS, senhaS, cpfS, emailS, "entregador", arquivoImagem);
+        new Usuario(nomeS, nomeUsuarioS, senhaS, cpfS, emailS, "entregador", arquivoImagem);
 
         Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
         confirmacao.setTitle("Confirmação");
@@ -86,7 +87,7 @@ public class CadastrarEntregadorController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -187,45 +188,43 @@ public class CadastrarEntregadorController implements Initializable {
             }
         }
 
-//        for (int i = 0; i < email.getLength(); i++) {
-//            if (email.getText().charAt(i) == '@') {
-//                erroNomeUsuario.setVisible(false);
-//                return;
-//            } else {
-//                erroEmail.setVisible(true);
-//                erroEmail.setText("Email inválido");
-//                email.setStyle("-fx-border-color: red;"
-//                        + "-fx-background-radius: 50px;"
-//                        + "-fx-border-radius: 50px;");
-//            }
-//        }
+        // for (int i = 0; i < email.getLength(); i++) {
+        // if (email.getText().charAt(i) == '@') {
+        // erroNomeUsuario.setVisible(false);
+        // return;
+        // } else {
+        // erroEmail.setVisible(true);
+        // erroEmail.setText("Email inválido");
+        // email.setStyle("-fx-border-color: red;"
+        // + "-fx-background-radius: 50px;"
+        // + "-fx-border-radius: 50px;");
+        // }
+        // }
     }
 
     @FXML
     public void verificaSenha(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (senha.getText().equals("")) {
-                senha.setStyle("-fx-border-color: red;"
-                        + "-fx-background-radius: 50px;"
-                        + "-fx-border-radius: 50px;");
-                return;
-            } else {
-                erroSenha.setVisible(false);
-                senha.setStyle("-fx-border-color: #00FF9A;"
-                        + "-fx-background-radius: 50px;"
-                        + "-fx-border-radius: 50px;");
-            }
+        if (senha.getText().equals("")) {
+            senha.setStyle("-fx-border-color: red;"
+                    + "-fx-background-radius: 50px;"
+                    + "-fx-border-radius: 50px;");
+            return;
+        } else {
+            erroSenha.setVisible(false);
+            senha.setStyle("-fx-border-color: #00FF9A;"
+                    + "-fx-background-radius: 50px;"
+                    + "-fx-border-radius: 50px;");
         }
     }
 
-    //Metodo para voltar a tela inicial do administrador
+    // Metodo para voltar a tela inicial do administrador
     @FXML
     public void sair(ActionEvent event) throws IOException {
         Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 

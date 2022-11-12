@@ -36,7 +36,7 @@ public class EditarProdutoController implements Initializable {
     private TextArea descricao;
 
     @FXML
-    private Spinner quant;
+    private Spinner<Integer> quant;
 
     @FXML
     private ImageView imagem = new ImageView();
@@ -88,7 +88,7 @@ public class EditarProdutoController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -98,7 +98,7 @@ public class EditarProdutoController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -133,8 +133,8 @@ public class EditarProdutoController implements Initializable {
         imagem.setImage(p.getImagem().getImage());
         descricao.setText(p.getDescricao());
 
-        SpinnerValueFactory<Integer> valorQuantidade
-                = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, p.getQuant());
+        SpinnerValueFactory<Integer> valorQuantidade = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100,
+                p.getQuant());
         quant.setValueFactory(valorQuantidade);
     }
 

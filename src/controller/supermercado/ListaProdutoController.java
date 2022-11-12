@@ -3,7 +3,6 @@ package controller.supermercado;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import model.Produto;
 import model.Supermercado;
 import principal.Principal;
@@ -68,7 +66,7 @@ public class ListaProdutoController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -85,16 +83,16 @@ public class ListaProdutoController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
-    //Pesquisa itens que tenha o mesmo nome que foi digitado no campo de texto
+    // Pesquisa itens que tenha o mesmo nome que foi digitado no campo de texto
     @FXML
     public void pesquisar(KeyEvent event) {
         carregarTabela();
         String pesquisa = caixaPesquisa.getText();
-        
+
         for (Produto p : Supermercado.getProdutos()) {
             for (int i = 0; i < pesquisa.length(); i++) {
                 if (p.getNomeProduto().charAt(i) != pesquisa.charAt(i)) {
@@ -109,7 +107,7 @@ public class ListaProdutoController implements Initializable {
         carregarTabela();
     }
 
-    public void carregarTabela() {      
+    public void carregarTabela() {
         observable = FXCollections.observableArrayList(Supermercado.getProdutos());
 
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -119,7 +117,7 @@ public class ListaProdutoController implements Initializable {
         quantidade.setCellValueFactory(new PropertyValueFactory<>("quant"));
         tabela.setItems(observable);
 
-        //Formatando fonte da tabela
+        // Formatando fonte da tabela
         tabela.setStyle("-fx-font-size: 15px; -fx-font-family: Source Sans Pro Extra Light;");
         tabela.getSelectionModel().selectFirst();
     }

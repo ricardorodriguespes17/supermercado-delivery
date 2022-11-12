@@ -28,7 +28,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -40,12 +39,12 @@ import principal.Principal;
 import static principal.Principal.root;
 
 public class TelaEntregadorController implements Initializable {
-    
+
     @FXML
     private Label logado;
     @FXML
     private ImageView fotoPerfil = new ImageView();
-    
+
     @FXML
     private MenuButton menu = new MenuButton();
 
@@ -58,69 +57,70 @@ public class TelaEntregadorController implements Initializable {
     private ImageView iconeNot = new ImageView();
 
     private ObservableList<Notificacao> obs;
-    
+
     @FXML
-    public void notificacaoPedido(ActionEvent event) throws IOException{
+    public void notificacaoPedido(ActionEvent event) throws IOException {
         Principal.root = FXMLLoader.load(getClass().getResource("/view/Entregas.fxml"));
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
+
     @FXML
-    public void notificacaoPedido(MouseEvent event) throws IOException{
+    public void notificacaoPedido(MouseEvent event) throws IOException {
         Principal.root = FXMLLoader.load(getClass().getResource("/view/Entregas.fxml"));
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
-    
+
     @FXML
     public void pedidos(ActionEvent event) throws IOException {
         Principal.root = FXMLLoader.load(getClass().getResource("/view/Entregas.fxml"));
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
-    
+
     @FXML
-    public void editarPerfil(ActionEvent event) throws IOException{
+    public void editarPerfil(ActionEvent event) throws IOException {
         Principal.root = FXMLLoader.load(getClass().getResource("/view/EditarPerfil.fxml"));
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
-    
+
     @FXML
-    public void removerEntregador(ActionEvent event) throws IOException{
+    public void removerEntregador(ActionEvent event) throws IOException {
         Principal.root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
-        for(Usuario u : Supermercado.getUsers()){
-            if(u.getNome().equals(LoginController.uN)){
+        for (Usuario u : Supermercado.getUsers()) {
+            if (u.getNome().equals(LoginController.uN.getNome())) {
                 Supermercado.getUsers().remove(u);
                 break;
             }
         }
     }
-    
+
     @FXML
     public void sairDaConta(ActionEvent event) throws Exception {
         Principal.root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -134,19 +134,19 @@ public class TelaEntregadorController implements Initializable {
             Logger.getLogger(TelaEntregadorController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void carregarNotificacao() throws FileNotFoundException {
         obs = FXCollections.observableArrayList(LoginController.uN.getNotificacoes());
         info.setCellValueFactory(new PropertyValueFactory<>("info"));
         not.setItems(obs);
-        
-        for(Notificacao n : not.getItems()){
-            if(n.isVisto()){
+
+        for (Notificacao n : not.getItems()) {
+            if (n.isVisto()) {
                 FileInputStream fis = new FileInputStream("src/imagens/notificacao_inativa.png");
                 Image image = new Image(fis);
                 iconeNot = new ImageView(image);
                 break;
-            }else{
+            } else {
                 FileInputStream fis = new FileInputStream("src/imagens/notificacao_ativa.png");
                 Image image = new Image(fis);
                 iconeNot = new ImageView(image);
@@ -154,7 +154,7 @@ public class TelaEntregadorController implements Initializable {
             }
         }
     }
-    
+
     public void carregarFotoPerfil() {
         File arquivo = new File(LoginController.uN.getUrlImagem());
         BufferedImage bufferedImage;
@@ -176,7 +176,7 @@ public class TelaEntregadorController implements Initializable {
 
         SnapshotParameters parameters = new SnapshotParameters();
         parameters.setFill(Color.TRANSPARENT);
-        WritableImage wi = fotoPerfil.snapshot(parameters, null);
+        fotoPerfil.snapshot(parameters, null);
     }
-    
+
 }

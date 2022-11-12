@@ -45,13 +45,14 @@ public class EditarPerfilClienteController implements Initializable {
 
     Usuario cliente = LoginController.uN;
 
-    //Declaração do selecionador de arquivo
+    // Declaração do selecionador de arquivo
     FileChooser fc = new FileChooser();
-    //Declaração e inicialização do arquivo onde irá receber o arquivo selecionado
+    // Declaração e inicialização do arquivo onde irá receber o arquivo selecionado
     File arquivoImagem = new File(cliente.getUrlImagem());
 
     ;
-    //Metodo que seleciona uma imagem em algum diretório do computador
+
+    // Metodo que seleciona uma imagem em algum diretório do computador
     @FXML
     private void adicionarImagem(ActionEvent event) {
         fc = new FileChooser();
@@ -95,7 +96,7 @@ public class EditarPerfilClienteController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -200,18 +201,16 @@ public class EditarPerfilClienteController implements Initializable {
 
     @FXML
     public void verificaSenha(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (senha.getText().equals("")) {
-                senha.setStyle("-fx-border-color: red;"
-                        + "-fx-background-radius: 50px;"
-                        + "-fx-border-radius: 50px;");
-                return;
-            } else {
-                erroSenha.setVisible(false);
-                senha.setStyle("-fx-border-color: #00FF9A;"
-                        + "-fx-background-radius: 50px;"
-                        + "-fx-border-radius: 50px;");
-            }
+        if (senha.getText().equals("")) {
+            senha.setStyle("-fx-border-color: red;"
+                    + "-fx-background-radius: 50px;"
+                    + "-fx-border-radius: 50px;");
+            return;
+        } else {
+            erroSenha.setVisible(false);
+            senha.setStyle("-fx-border-color: #00FF9A;"
+                    + "-fx-background-radius: 50px;"
+                    + "-fx-border-radius: 50px;");
         }
     }
 
@@ -221,7 +220,7 @@ public class EditarPerfilClienteController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 

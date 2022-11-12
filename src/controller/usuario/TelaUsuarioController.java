@@ -26,7 +26,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javax.imageio.ImageIO;
@@ -54,14 +53,14 @@ public class TelaUsuarioController implements Initializable {
     private ImageView iconeNot = new ImageView();
 
     private ObservableList<Notificacao> obs;
-    
+
     @FXML
-    public void abrirMensagens() throws IOException{
+    public void abrirMensagens() throws IOException {
         Principal.root = FXMLLoader.load(getClass().getResource("/view/Mensagens.fxml"));
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -71,7 +70,7 @@ public class TelaUsuarioController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -81,7 +80,7 @@ public class TelaUsuarioController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -91,7 +90,7 @@ public class TelaUsuarioController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -101,7 +100,7 @@ public class TelaUsuarioController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -113,7 +112,7 @@ public class TelaUsuarioController implements Initializable {
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
-        
+
         logado.setText(LoginController.uN.getNome());
     }
 
@@ -121,14 +120,14 @@ public class TelaUsuarioController implements Initializable {
         obs = FXCollections.observableArrayList(LoginController.uN.getNotificacoes());
         info.setCellValueFactory(new PropertyValueFactory<>("info"));
         not.setItems(obs);
-        
-        for(Notificacao n : not.getItems()){
-            if(n.isVisto()){
+
+        for (Notificacao n : not.getItems()) {
+            if (n.isVisto()) {
                 FileInputStream fis = new FileInputStream("src/imagens/notificacao_inativa.png");
                 Image image = new Image(fis);
                 iconeNot = new ImageView(image);
                 break;
-            }else{
+            } else {
                 FileInputStream fis = new FileInputStream("src/imagens/notificacao_ativa.png");
                 Image image = new Image(fis);
                 iconeNot = new ImageView(image);
@@ -142,8 +141,8 @@ public class TelaUsuarioController implements Initializable {
         BufferedImage bufferedImage;
         Image image = null;
         try {
-            if(!arquivo.exists()){
-                //SE NAO EXISTIR IMAGEM NO DIRETORIO, USUARA IMAGEM GENERICA
+            if (!arquivo.exists()) {
+                // SE NAO EXISTIR IMAGEM NO DIRETORIO, USUARA IMAGEM GENERICA
                 LoginController.uN.setUrlImagem("src/imagens/usuario.png");
                 arquivo = new File(LoginController.uN.getUrlImagem());
             }
@@ -163,7 +162,7 @@ public class TelaUsuarioController implements Initializable {
 
         SnapshotParameters parameters = new SnapshotParameters();
         parameters.setFill(Color.TRANSPARENT);
-        WritableImage wi = fotoPerfil.snapshot(parameters, null);
+        fotoPerfil.snapshot(parameters, null);
     }
 
 }

@@ -14,16 +14,16 @@ import java.util.logging.Logger;
 
 public class Supermercado implements Serializable {
 
-    //ATRIBUTOS
+    // ATRIBUTOS
     private static List<Produto> produtos = new ArrayList<>();
     private static List<Usuario> users = new ArrayList<>();
     private static List<Pedidos> todosPedidos = new ArrayList<>();
     private static List<Mensagem> mensagens = new ArrayList<>();
 
-    //METODOS
+    // METODOS
     public static void gravarDados() {
         try {
-            //Salvando todos usuarios em um arquivo
+            // Salvando todos usuarios em um arquivo
             FileOutputStream usersBase = new FileOutputStream("src/arquivos/usersbase.dat");
             ObjectOutputStream objectUsers = new ObjectOutputStream(usersBase);
             objectUsers.writeObject(users);
@@ -31,15 +31,13 @@ public class Supermercado implements Serializable {
             objectUsers.close();
             usersBase.flush();
             usersBase.close();
-
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-
-            //Salvando todos produtos em um arquivo
+            // Salvando todos produtos em um arquivo
             FileOutputStream produtosBase = new FileOutputStream("src/arquivos/produtosbase.dat");
             ObjectOutputStream objectProdutos = new ObjectOutputStream(produtosBase);
             objectProdutos.writeObject(produtos);
@@ -47,14 +45,13 @@ public class Supermercado implements Serializable {
             objectProdutos.close();
             produtosBase.flush();
             produtosBase.close();
-
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            //Salvando todos pedidos em um arquivo
+            // Salvando todos pedidos em um arquivo
             FileOutputStream pedidosBase = new FileOutputStream("src/arquivos/pedidosbase.dat");
             ObjectOutputStream objectPedidos = new ObjectOutputStream(pedidosBase);
             objectPedidos.writeObject(todosPedidos);
@@ -69,7 +66,7 @@ public class Supermercado implements Serializable {
         }
 
         try {
-            //Salvando todos usuarios em um arquivo
+            // Salvando todos usuarios em um arquivo
             FileOutputStream mensagemBase = new FileOutputStream("src/arquivos/mensagembase.dat");
             ObjectOutputStream objectMensagem = new ObjectOutputStream(mensagemBase);
             objectMensagem.writeObject(mensagens);
@@ -77,7 +74,6 @@ public class Supermercado implements Serializable {
             objectMensagem.close();
             mensagemBase.flush();
             mensagemBase.close();
-
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -93,37 +89,29 @@ public class Supermercado implements Serializable {
             users = (List<Usuario>) (objectUsers.readObject());
             objectUsers.close();
             usersBase.close();
-
         } catch (IOException ex) {
-
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Supermercado.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
-
             FileInputStream produtosBase = new FileInputStream("src/arquivos/produtosbase.dat");
             ObjectInputStream objectProdutos = new ObjectInputStream(produtosBase);
             produtos = (List<Produto>) (objectProdutos.readObject());
             objectProdutos.close();
             produtosBase.close();
-
         } catch (IOException ex) {
-
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Supermercado.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
-
             FileInputStream pedidosBase = new FileInputStream("src/arquivos/pedidosbase.dat");
             ObjectInputStream objectPedidos = new ObjectInputStream(pedidosBase);
             todosPedidos = (List<Pedidos>) (objectPedidos.readObject());
             objectPedidos.close();
             pedidosBase.close();
-
         } catch (IOException ex) {
-
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Supermercado.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -134,9 +122,7 @@ public class Supermercado implements Serializable {
             mensagens = (List<Mensagem>) (objectMensagem.readObject());
             objectMensagem.close();
             mensagemBase.close();
-
         } catch (IOException ex) {
-
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Supermercado.class.getName()).log(Level.SEVERE, null, ex);
         }

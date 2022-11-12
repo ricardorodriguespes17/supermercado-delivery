@@ -40,12 +40,12 @@ public class CriarContaController implements Initializable {
     @FXML
     private ImageView imagem = new ImageView();
 
-    //Declaração do selecionador de arquivo
+    // Declaração do selecionador de arquivo
     FileChooser fc = new FileChooser();
-    //Declaração e inicialização do arquivo onde irá receber o arquivo selecionado
+    // Declaração e inicialização do arquivo onde irá receber o arquivo selecionado
     File arquivoImagem = new File("src/imagens/usuario.png");
 
-    //Metodo que seleciona uma imagem em algum diretório do computador
+    // Metodo que seleciona uma imagem em algum diretório do computador
     @FXML
     private void adicionarImagem(ActionEvent event) {
         fc = new FileChooser();
@@ -80,14 +80,15 @@ public class CriarContaController implements Initializable {
         u = nomeUsuario.getText();
         se = senha.getText();
         t = "cliente";
-        if (erroNome.isVisible() && erroEmail.isVisible() && erroNomeUsuario.isVisible() && erroCpf.isVisible() && erroSenha.isVisible()) {
+        if (erroNome.isVisible() && erroEmail.isVisible() && erroNomeUsuario.isVisible() && erroCpf.isVisible()
+                && erroSenha.isVisible()) {
             verificaNome(evento);
             verificaNomeUsuario(evento);
             verificaEmail(evento);
             verificaCpf(evento);
             verificaSenha(evento);
         } else {
-            Usuario novoUsuario = new Usuario(n, u, se, c, e, t, arquivoImagem);
+            new Usuario(n, u, se, c, e, t, arquivoImagem);
 
             Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
             confirmacao.setTitle("Confirmação");
@@ -116,15 +117,15 @@ public class CriarContaController implements Initializable {
 
     @FXML
     public void verificaNome(KeyEvent event) {
-        //se esse campo estiver vazio, ira sinalizar o erro ate que digite algo
+        // se esse campo estiver vazio, ira sinalizar o erro ate que digite algo
         if (nome.getText().equals("")) {
             erroNome.setVisible(true);
             nome.setStyle("-fx-background-color: #FFFFFF;\n" +
-            "-fx-border-color: #FF0000;");
+                    "-fx-border-color: #FF0000;");
         } else {
             erroNome.setVisible(false);
             nome.setStyle("-fx-background-color: #FFFFFF;\n" +
-            "-fx-border-color: #00FF9A;");
+                    "-fx-border-color: #00FF9A;");
         }
     }
 
@@ -135,18 +136,18 @@ public class CriarContaController implements Initializable {
                 erroNomeUsuario.setVisible(true);
                 erroNomeUsuario.setText("Nome de Usuário já existe");
                 nomeUsuario.setStyle("-fx-background-color: #FFFFFF;\n" +
-                "-fx-border-color: #FF0000;");
+                        "-fx-border-color: #FF0000;");
                 return;
             } else if (nomeUsuario.getText().equals("")) {
                 erroNomeUsuario.setVisible(true);
                 erroNomeUsuario.setText("Campo obrigatório");
                 nomeUsuario.setStyle("-fx-background-color: #FFFFFF;\n" +
-                "-fx-border-color: #FF0000;");
+                        "-fx-border-color: #FF0000;");
                 return;
             } else {
                 erroNomeUsuario.setVisible(false);
                 nomeUsuario.setStyle("-fx-background-color: #FFFFFF;\n" +
-                "-fx-border-color: #00FF9A;");
+                        "-fx-border-color: #00FF9A;");
             }
         }
     }
@@ -161,12 +162,12 @@ public class CriarContaController implements Initializable {
                 erroCpf.setVisible(true);
                 erroCpf.setText("CPF já existe");
                 cpf.setStyle("-fx-background-color: #FFFFFF;\n" +
-                "-fx-border-color: #FF0000;");
+                        "-fx-border-color: #FF0000;");
                 return;
             } else {
                 erroCpf.setVisible(false);
                 cpf.setStyle("-fx-background-color: #FFFFFF;\n" +
-                "-fx-border-color: #00FF9A;");
+                        "-fx-border-color: #00FF9A;");
             }
         }
 
@@ -174,11 +175,11 @@ public class CriarContaController implements Initializable {
             erroCpf.setVisible(true);
             erroCpf.setText("CPF inválido");
             cpf.setStyle("-fx-background-color: #FFFFFF;\n" +
-            "-fx-border-color: #FF0000;");
+                    "-fx-border-color: #FF0000;");
         } else {
             erroCpf.setVisible(false);
             cpf.setStyle("-fx-background-color: #FFFFFF;\n" +
-            "-fx-border-color: #00FF9A;");
+                    "-fx-border-color: #00FF9A;");
         }
     }
 
@@ -192,34 +193,32 @@ public class CriarContaController implements Initializable {
                 erroEmail.setVisible(true);
                 erroEmail.setText("Email já cadastrado");
                 email.setStyle("-fx-background-color: #FFFFFF;\n" +
-                "-fx-border-color: #FF0000;");
+                        "-fx-border-color: #FF0000;");
                 return;
             } else {
                 erroNomeUsuario.setVisible(false);
                 erroEmail.setText("");
                 email.setStyle("-fx-background-color: #FFFFFF;\n" +
-                "-fx-border-color: #00FF9A;");
+                        "-fx-border-color: #00FF9A;");
             }
         }
     }
 
     @FXML
     public void verificaSenha(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (senha.getText().equals("")) {
-                senha.setStyle("-fx-background-color: #FFFFFF;\n" +
-                "-fx-border-color: #FF0000;");
-                return;
-            } else {
-                erroNomeUsuario.setVisible(false);
-                senha.setStyle("-fx-background-color: #FFFFFF;\n" +
-                "-fx-border-color: #00FF9A;");
-            }
+        if (senha.getText().equals("")) {
+            senha.setStyle("-fx-background-color: #FFFFFF;\n" +
+                    "-fx-border-color: #FF0000;");
+            return;
+        } else {
+            erroNomeUsuario.setVisible(false);
+            senha.setStyle("-fx-background-color: #FFFFFF;\n" +
+                    "-fx-border-color: #00FF9A;");
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
     }
 }

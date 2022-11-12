@@ -21,7 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import model.Produto;
 import model.Supermercado;
 import principal.Principal;
@@ -45,7 +44,7 @@ public class VerProdutoController implements Initializable {
     private ObservableList<Produto> observable;
 
     @FXML
-    private Spinner quant;
+    private Spinner<Integer> quant;
 
     @FXML
     private TextField caixaPesquisa;
@@ -56,7 +55,7 @@ public class VerProdutoController implements Initializable {
         for (int i = 0; i < (int) quant.getValue(); i++) {
             LoginController.uN.getCarrinho().getProdutosSolicitados().add(selectedItem);
         }
-        
+
         Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
         confirmacao.setTitle("Confirmação");
         confirmacao.setHeaderText("");
@@ -71,7 +70,7 @@ public class VerProdutoController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
@@ -81,16 +80,16 @@ public class VerProdutoController implements Initializable {
         Scene cena = new Scene(root);
         Principal.palco.setScene(cena);
         Principal.palco.show();
-        //Colocar palco no centro da tela
+        // Colocar palco no centro da tela
         Principal.palco.centerOnScreen();
     }
 
-    //Pesquisa itens que tenha o mesmo nome que foi digitado no campo de texto
+    // Pesquisa itens que tenha o mesmo nome que foi digitado no campo de texto
     @FXML
     public void pesquisar(KeyEvent event) {
         carregarTabela();
         String pesquisa = caixaPesquisa.getText();
-        
+
         for (Produto p : Supermercado.getProdutos()) {
             for (int i = 0; i < pesquisa.length(); i++) {
                 if (p.getNomeProduto().charAt(i) != pesquisa.charAt(i)) {
@@ -113,24 +112,23 @@ public class VerProdutoController implements Initializable {
         cod.setCellValueFactory(new PropertyValueFactory<>("cod"));
         valor.setCellValueFactory(new PropertyValueFactory<>("valor"));
         quantidade.setCellValueFactory(new PropertyValueFactory<>("quant"));
-        
+
         tabela.setItems(observable);
 
-        //Formatando fonte da tabela
+        // Formatando fonte da tabela
         tabela.setStyle("-fx-font-size: 15px; -fx-font-family: Source Sans Pro Extra Light;");
-        //Selecionando o primeiro item ao iniciar
+        // Selecionando o primeiro item ao iniciar
         tabela.getSelectionModel().selectFirst();
-        
-        //Remover itens que tiverem quantidade igual a 0
-        for(Produto p : Supermercado.getProdutos()){
-            if(p.getQuant() == 0){
+
+        // Remover itens que tiverem quantidade igual a 0
+        for (Produto p : Supermercado.getProdutos()) {
+            if (p.getQuant() == 0) {
                 tabela.getItems().remove(p);
             }
         }
 
-        //inicialização do Campo que seleciona o numero de quantidade do produto
-        SpinnerValueFactory<Integer> valorQuantidade
-                = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1);
+        // inicialização do Campo que seleciona o numero de quantidade do produto
+        SpinnerValueFactory<Integer> valorQuantidade = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1);
         quant.setValueFactory(valorQuantidade);
     }
 }
