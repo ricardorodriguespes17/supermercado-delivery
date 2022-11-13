@@ -2,21 +2,20 @@ package model;
 
 import java.io.Serializable;
 
-public class Notificacao implements Serializable{
-    //ATRIBUTOS
+public class Notificacao implements Serializable {
+    // ATRIBUTOS
     private String info;
     private boolean visto;
     private Usuario usuario;
 
-    //CONSTRUTOR
-    public Notificacao(String info, Usuario usuario){
+    // CONSTRUTOR
+    public Notificacao(String info, Usuario usuario) {
         this.info = info;
         this.visto = false;
         this.usuario = usuario;
-        usuario.getNotificacoes().add(this);
     }
-    
-    //METODOS
+
+    // METODOS
     public String getInfo() {
         return info;
     }

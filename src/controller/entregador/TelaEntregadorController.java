@@ -13,7 +13,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -32,6 +31,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javax.imageio.ImageIO;
+
+import model.Entregador;
 import model.Notificacao;
 import model.Supermercado;
 import model.Usuario;
@@ -54,6 +55,7 @@ public class TelaEntregadorController implements Initializable {
     @FXML
     private ImageView iconeNot = new ImageView();
 
+    private Entregador loggedUser = (Entregador) LoginController.uN;
     private ObservableList<Notificacao> obs;
 
     @FXML
@@ -111,7 +113,7 @@ public class TelaEntregadorController implements Initializable {
     }
 
     public void carregarNotificacao() throws FileNotFoundException {
-        obs = FXCollections.observableArrayList(LoginController.uN.getNotificacoes());
+        // obs = FXCollections.observableArrayList(loggedUser.getNotificacoes());
         info.setCellValueFactory(new PropertyValueFactory<>("info"));
         not.setItems(obs);
 
@@ -131,7 +133,7 @@ public class TelaEntregadorController implements Initializable {
     }
 
     public void carregarFotoPerfil() {
-        File arquivo = new File(LoginController.uN.getUrlImagem());
+        File arquivo = new File(loggedUser.getUrlImagem());
         BufferedImage bufferedImage;
         Image image = null;
         try {

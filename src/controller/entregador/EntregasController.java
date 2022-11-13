@@ -17,7 +17,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Notificacao;
 import model.Pedidos;
 import model.Produto;
 import model.Supermercado;
@@ -55,9 +54,9 @@ public class EntregasController implements Initializable {
         // Atualizar os itens da tabela
         carregarTabela();
 
-        // Mandar notificação ao usuario
-        Notificacao n = new Notificacao("Pedido está a caminho", selectedItem.getUser());
-        selectedItem.getUser().getNotificacoes().add(n);
+        // Notificacao n = new Notificacao("Pedido está a caminho",
+        // selectedItem.getUser());
+        // selectedItem.getUser().getNotificacoes().add(n);
 
         Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
         confirmacao.setTitle("Confirmação");

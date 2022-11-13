@@ -5,15 +5,11 @@ import controller.StageController;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,12 +20,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javax.imageio.ImageIO;
+
+import model.Cliente;
 import model.Notificacao;
 
 public class TelaUsuarioController implements Initializable {
@@ -51,7 +48,7 @@ public class TelaUsuarioController implements Initializable {
     @FXML
     private ImageView iconeNot = new ImageView();
 
-    private ObservableList<Notificacao> obs;
+    public Cliente loggedClient = (Cliente) LoginController.uN;
 
     @FXML
     public void abrirMensagens() throws IOException {
@@ -86,44 +83,47 @@ public class TelaUsuarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         carregarFotoPerfil();
-        try {
-            carregarNotificacao();
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
+        // try {
+        // carregarNotificacao();
+        // } catch (FileNotFoundException ex) {
+        // ex.printStackTrace();
+        // }
 
         logado.setText(LoginController.uN.getNome());
     }
 
-    public void carregarNotificacao() throws FileNotFoundException {
-        obs = FXCollections.observableArrayList(LoginController.uN.getNotificacoes());
-        info.setCellValueFactory(new PropertyValueFactory<>("info"));
-        not.setItems(obs);
+    // public void carregarNotificacao() throws FileNotFoundException {
+    // obs =
+    // FXCollections.observableArrayList(LoginController.uN.getNotificacoes());
+    // info.setCellValueFactory(new PropertyValueFactory<>("info"));
+    // not.setItems(obs);
 
-        for (Notificacao n : not.getItems()) {
-            if (n.isVisto()) {
-                FileInputStream fis = new FileInputStream("src/imagens/notificacao_inativa.png");
-                Image image = new Image(fis);
-                iconeNot = new ImageView(image);
-                break;
-            } else {
-                FileInputStream fis = new FileInputStream("src/imagens/notificacao_ativa.png");
-                Image image = new Image(fis);
-                iconeNot = new ImageView(image);
-                break;
-            }
-        }
-    }
+    // for (Notificacao n : not.getItems()) {
+    // if (n.isVisto()) {
+    // FileInputStream fis = new
+    // FileInputStream("src/imagens/notificacao_inativa.png");
+    // Image image = new Image(fis);
+    // iconeNot = new ImageView(image);
+    // break;
+    // } else {
+    // FileInputStream fis = new
+    // FileInputStream("src/imagens/notificacao_ativa.png");
+    // Image image = new Image(fis);
+    // iconeNot = new ImageView(image);
+    // break;
+    // }
+    // }
+    // }
 
     public void carregarFotoPerfil() {
-        File arquivo = new File(LoginController.uN.getUrlImagem());
+        File arquivo = new File(loggedClient.getUrlImagem());
         BufferedImage bufferedImage;
         Image image = null;
         try {
             if (!arquivo.exists()) {
                 // SE NAO EXISTIR IMAGEM NO DIRETORIO, USUARA IMAGEM GENERICA
-                LoginController.uN.setUrlImagem("src/imagens/usuario.png");
-                arquivo = new File(LoginController.uN.getUrlImagem());
+                loggedClient.setUrlImagem("src/imagens/usuario.png");
+                arquivo = new File(loggedClient.getUrlImagem());
             }
             bufferedImage = ImageIO.read(arquivo);
             image = SwingFXUtils.toFXImage(bufferedImage, null);

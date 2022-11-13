@@ -18,23 +18,24 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import model.Entregador;
 import model.Supermercado;
 import model.Usuario;
 
 public class RemoverEntregadorController implements Initializable {
 
     @FXML
-    private final TableView<Usuario> tabela = new TableView<>();
+    private final TableView<Entregador> tabela = new TableView<>();
     @FXML
-    private final TableColumn<Usuario, ImageView> imagem = new TableColumn<>();
+    private final TableColumn<Entregador, ImageView> imagem = new TableColumn<>();
     @FXML
-    private final TableColumn<Usuario, String> nome;
+    private final TableColumn<Entregador, String> nome;
     @FXML
-    private final TableColumn<Usuario, String> cpf = new TableColumn<>();
+    private final TableColumn<Entregador, String> cpf = new TableColumn<>();
     @FXML
-    private final TableColumn<Usuario, String> email = new TableColumn<>();
+    private final TableColumn<Entregador, String> email = new TableColumn<>();
 
-    private ObservableList<Usuario> observable;
+    private ObservableList<Entregador> observable;
 
     public RemoverEntregadorController() {
         this.nome = new TableColumn<>();
@@ -42,14 +43,15 @@ public class RemoverEntregadorController implements Initializable {
 
     @FXML
     public void remover(ActionEvent event) throws IOException {
-        Usuario selectedItem = tabela.getSelectionModel().getSelectedItem();
+        Entregador selectedItem = tabela.getSelectionModel().getSelectedItem();
         tabela.getItems().remove(selectedItem);
 
-        for (Usuario u : Supermercado.getUsers()) {
-            if (u.getCpf().equals(selectedItem.getCpf())) {
-                File imagemProdutoRemovido = new File(u.getUrlImagem());
+        for (Entregador e : Supermercado.getEntregadores()) {
+            if (e.getCpf().equals(selectedItem.getCpf())) {
+                File imagemProdutoRemovido = new File(e.getUrlImagem());
                 imagemProdutoRemovido.delete();
-                Supermercado.getUsers().remove(u);
+                Supermercado.getEntregadores().remove(e);
+
                 Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
                 confirmacao.setTitle("Remoção");
                 confirmacao.setHeaderText("");
@@ -75,7 +77,7 @@ public class RemoverEntregadorController implements Initializable {
 
     // Carrega a TableView com os dados dos usuários
     public void carregarTabela() {
-        observable = FXCollections.observableArrayList(Supermercado.getUsers());
+        observable = FXCollections.observableArrayList(Supermercado.getEntregadores());
 
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         imagem.setCellValueFactory(new PropertyValueFactory<>("imagem"));

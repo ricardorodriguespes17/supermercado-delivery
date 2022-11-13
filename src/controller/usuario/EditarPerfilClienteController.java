@@ -25,6 +25,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+
+import model.Cliente;
 import model.Supermercado;
 import model.Usuario;
 
@@ -41,7 +43,7 @@ public class EditarPerfilClienteController implements Initializable {
     @FXML
     private Label erroNome, erroNomeUsuario, erroSenha, erroEmail, erroCpf;
 
-    Usuario cliente = LoginController.uN;
+    Cliente cliente = (Cliente) LoginController.uN;
 
     // Declaração do selecionador de arquivo
     FileChooser fc = new FileChooser();
@@ -137,11 +139,11 @@ public class EditarPerfilClienteController implements Initializable {
 
     @FXML
     public void verificaCpf(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (u.getCpf() == null) {
+        for (Cliente client : Supermercado.getClientes()) {
+            if (client.getCpf() == null) {
                 return;
             }
-            if (u.getCpf().equals(cpf.getText())) {
+            if (client.getCpf().equals(cpf.getText())) {
                 erroCpf.setVisible(true);
                 erroCpf.setText("CPF já existe");
                 cpf.setStyle("-fx-border-color: red;"
@@ -172,11 +174,11 @@ public class EditarPerfilClienteController implements Initializable {
 
     @FXML
     public void verificaEmail(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (u.getEmail() == null) {
+        for (Cliente client : Supermercado.getClientes()) {
+            if (client.getEmail() == null) {
                 return;
             }
-            if (u.getEmail().equals(email.getText())) {
+            if (client.getEmail().equals(email.getText())) {
                 erroEmail.setVisible(true);
                 erroEmail.setText("Email já cadastrado");
                 email.setStyle("-fx-border-color: red;"

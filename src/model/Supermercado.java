@@ -17,6 +17,8 @@ public class Supermercado implements Serializable {
     // ATRIBUTOS
     private static List<Produto> produtos = new ArrayList<>();
     private static List<Usuario> users = new ArrayList<>();
+    private static List<Cliente> clientes = new ArrayList<>();
+    private static List<Entregador> entregadores = new ArrayList<>();
     private static List<Pedidos> todosPedidos = new ArrayList<>();
     private static List<Mensagem> mensagens = new ArrayList<>();
 
@@ -135,6 +137,14 @@ public class Supermercado implements Serializable {
 
     public static List<Usuario> getUsers() {
         return users;
+    }
+
+    public static List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public static List<Entregador> getEntregadores() {
+        return entregadores;
     }
 
     public static void setProdutos(List<Produto> produtos) {

@@ -2,15 +2,22 @@ package model;
 
 import java.io.Serializable;
 
-public class Endereco implements Serializable{
-    //ATRIBUTOS
+public class Endereco implements Serializable {
+    // ATRIBUTOS
     private String logradouro;
     private String numeroCasa;
     private String bairro;
     private String complemento;
     private String pontoReferencia;
 
-    //CONSTRUTOR
+    public Endereco() {
+        this.logradouro = "";
+        this.numeroCasa = "";
+        this.bairro = "";
+        this.complemento = "";
+        this.pontoReferencia = "";
+    }
+
     public Endereco(String logradouro, String numeroCasa, String bairro, String complemento, String pontoReferencia) {
         this.logradouro = logradouro;
         this.numeroCasa = numeroCasa;
@@ -19,7 +26,7 @@ public class Endereco implements Serializable{
         this.pontoReferencia = pontoReferencia;
     }
 
-    //GETERES E SETERES
+    // GETERES E SETERES
     public String getLogradouro() {
         return logradouro;
     }
@@ -59,6 +66,5 @@ public class Endereco implements Serializable{
     public void setPontoReferencia(String pontoReferencia) {
         this.pontoReferencia = pontoReferencia;
     }
-    
-    
+
 }

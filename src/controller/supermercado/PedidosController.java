@@ -55,8 +55,9 @@ public class PedidosController implements Initializable {
         new Notificacao("Pedido confirmado", selectedItem.getUser());
         for (Usuario u : Supermercado.getUsers()) {
             if ("entregador".equals(u.getTipo())) {
-                Notificacao notificarEntregador = new Notificacao("Um pedido para ser entregue", u);
-                u.getNotificacoes().add(notificarEntregador);
+                // Notificacao notificarEntregador = new Notificacao("Um pedido para ser
+                // entregue", u);
+                // u.getNotificacoes().add(notificarEntregador);
             }
         }
 
@@ -80,9 +81,8 @@ public class PedidosController implements Initializable {
             }
         }
 
-        // Mandar notificação para o usuario
-        Notificacao n = new Notificacao("Pedido cancelado", selectedItem.getUser());
-        selectedItem.getUser().getNotificacoes().add(n);
+        // Notificacao n = new Notificacao("Pedido cancelado", selectedItem.getUser());
+        // selectedItem.getUser().getNotificacoes().add(n);
 
         Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
         confirmacao.setTitle("Confirmação");

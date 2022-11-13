@@ -13,8 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import model.Cliente;
 import model.Pedidos;
-import model.Usuario;
 
 public class ConfirmarPedidoController implements Initializable {
 
@@ -23,7 +23,7 @@ public class ConfirmarPedidoController implements Initializable {
     private TextField rua, num, bairro, ref, complemento;
 
     // variavel que receberá usuario que está logado
-    Usuario u = LoginController.uN;
+    Cliente loggedClient = (Cliente) LoginController.uN;
 
     // Confirma o pedido feito pelo cliente
     @FXML
@@ -49,11 +49,12 @@ public class ConfirmarPedidoController implements Initializable {
         LoginController.uN.getCarrinho().getProdutosSolicitados().clear();
 
         // Salvar os dados residenciais escolhido pelo cliente
-        u.setLogradouro(rua.getText());
-        u.setNumeroCasa(num.getText());
-        u.setBairro(bairro.getText());
-        u.setPontoReferencia(ref.getText());
-        u.setComplemento(complemento.getText());
+
+        loggedClient.setLogradouro(rua.getText());
+        loggedClient.setNumeroCasa(num.getText());
+        loggedClient.setBairro(bairro.getText());
+        loggedClient.setPontoReferencia(ref.getText());
+        loggedClient.setComplemento(complemento.getText());
 
         // volta para tela principal do usuario
         StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
@@ -75,11 +76,11 @@ public class ConfirmarPedidoController implements Initializable {
 
     // carrega os dados residenciais salvos pelo cliente
     public void carregarEndereco() {
-        rua.setText(u.getLogradouro());
-        num.setText(u.getNumeroCasa());
-        bairro.setText(u.getBairro());
-        ref.setText(u.getPontoReferencia());
-        complemento.setText(u.getComplemento());
+        rua.setText(loggedClient.getLogradouro());
+        num.setText(loggedClient.getNumeroCasa());
+        bairro.setText(loggedClient.getBairro());
+        ref.setText(loggedClient.getPontoReferencia());
+        complemento.setText(loggedClient.getComplemento());
     }
 
 }

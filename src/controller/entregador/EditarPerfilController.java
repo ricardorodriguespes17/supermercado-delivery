@@ -25,6 +25,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+
+import model.Entregador;
 import model.Supermercado;
 import model.Usuario;
 
@@ -41,7 +43,7 @@ public class EditarPerfilController implements Initializable {
     @FXML
     private Label erroNome, erroNomeUsuario, erroSenha, erroEmail, erroCpf;
 
-    Usuario entregador;
+    Entregador entregador;
 
     // Declaração do selecionador de arquivo
     FileChooser fc = new FileChooser();
@@ -123,11 +125,11 @@ public class EditarPerfilController implements Initializable {
 
     @FXML
     public void verificaCpf(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (u.getCpf() == null) {
+        for (Entregador e : Supermercado.getEntregadores()) {
+            if (e.getCpf() == null) {
                 return;
             }
-            if (u.getCpf().equals(cpf.getText())) {
+            if (e.getCpf().equals(cpf.getText())) {
                 erroCpf.setVisible(true);
                 erroCpf.setText("CPF já existe");
                 cpf.setStyle("-fx-border-color: red;");
@@ -150,11 +152,11 @@ public class EditarPerfilController implements Initializable {
 
     @FXML
     public void verificaEmail(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (u.getEmail() == null) {
+        for (Entregador e : Supermercado.getEntregadores()) {
+            if (e.getEmail() == null) {
                 return;
             }
-            if (u.getEmail().equals(email.getText())) {
+            if (e.getEmail().equals(email.getText())) {
                 erroEmail.setVisible(true);
                 erroEmail.setText("Email já cadastrado");
                 email.setStyle("-fx-border-color: red;");
@@ -186,9 +188,9 @@ public class EditarPerfilController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (u.getNome().equals(LoginController.uN.getNome())) {
-                entregador = u;
+        for (Entregador e : Supermercado.getEntregadores()) {
+            if (e.getNome().equals(LoginController.uN.getNome())) {
+                entregador = e;
                 break;
             }
         }

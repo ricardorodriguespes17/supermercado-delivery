@@ -22,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import controller.StageController;
+import model.Entregador;
 import model.Supermercado;
 import model.Usuario;
 
@@ -72,7 +73,7 @@ public class CadastrarEntregadorController implements Initializable {
         emailS = email.getText();
         senhaS = senha.getText();
         cpfS = cpf.getText();
-        new Usuario(nomeS, nomeUsuarioS, senhaS, cpfS, emailS, "entregador", arquivoImagem);
+        new Entregador(nomeS, nomeUsuarioS, senhaS, cpfS, emailS, arquivoImagem);
 
         Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
         confirmacao.setTitle("Confirmação");
@@ -128,11 +129,11 @@ public class CadastrarEntregadorController implements Initializable {
 
     @FXML
     public void verificaCpf(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (u.getCpf() == null) {
+        for (Entregador e : Supermercado.getEntregadores()) {
+            if (e.getCpf() == null) {
                 return;
             }
-            if (u.getCpf().equals(cpf.getText())) {
+            if (e.getCpf().equals(cpf.getText())) {
                 erroCpf.setVisible(true);
                 erroCpf.setText("CPF já existe");
                 cpf.setStyle("-fx-border-color: red;"
@@ -163,11 +164,11 @@ public class CadastrarEntregadorController implements Initializable {
 
     @FXML
     public void verificaEmail(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (u.getEmail() == null) {
+        for (Entregador e : Supermercado.getEntregadores()) {
+            if (e.getEmail() == null) {
                 return;
             }
-            if (u.getEmail().equals(email.getText())) {
+            if (e.getEmail().equals(email.getText())) {
                 erroEmail.setVisible(true);
                 erroEmail.setText("Email já cadastrado");
                 email.setStyle("-fx-border-color: red;"

@@ -1,7 +1,5 @@
 package principal;
 
-import java.io.File;
-
 import controller.StageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,8 +33,7 @@ public class Principal extends Application {
             }
         }
         if (i == 0) {
-            new Usuario("Administrador", "admin", "admin", "admin", "admin", "admin",
-                    new File("src/imagens/usuario.png"));
+            new Usuario("Administrador", "admin", "admin", "admin");
         }
     }
 }

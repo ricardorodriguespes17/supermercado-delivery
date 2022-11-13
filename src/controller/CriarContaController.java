@@ -25,6 +25,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+
+import model.Cliente;
 import model.Supermercado;
 import model.Usuario;
 import principal.Principal;
@@ -73,13 +75,12 @@ public class CriarContaController implements Initializable {
         verificaEmail(evento);
         verificaCpf(evento);
         verificaSenha(evento);
-        String n, e, u, se, c, t;
+        String n, e, u, se, c;
         n = nome.getText();
         c = cpf.getText();
         e = email.getText();
         u = nomeUsuario.getText();
         se = senha.getText();
-        t = "cliente";
         if (erroNome.isVisible() && erroEmail.isVisible() && erroNomeUsuario.isVisible() && erroCpf.isVisible()
                 && erroSenha.isVisible()) {
             verificaNome(evento);
@@ -88,7 +89,7 @@ public class CriarContaController implements Initializable {
             verificaCpf(evento);
             verificaSenha(evento);
         } else {
-            new Usuario(n, u, se, c, e, t, arquivoImagem);
+            new Cliente(n, u, se, c, e, arquivoImagem);
 
             Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
             confirmacao.setTitle("Confirmação");
@@ -154,7 +155,7 @@ public class CriarContaController implements Initializable {
 
     @FXML
     public void verificaCpf(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
+        for (Cliente u : Supermercado.getClientes()) {
             if (u.getCpf() == null) {
                 return;
             }
@@ -185,11 +186,11 @@ public class CriarContaController implements Initializable {
 
     @FXML
     public void verificaEmail(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
-            if (u.getEmail() == null) {
+        for (Cliente c : Supermercado.getClientes()) {
+            if (c.getEmail() == null) {
                 return;
             }
-            if (u.getEmail().equals(email.getText())) {
+            if (c.getEmail().equals(email.getText())) {
                 erroEmail.setVisible(true);
                 erroEmail.setText("Email já cadastrado");
                 email.setStyle("-fx-background-color: #FFFFFF;\n" +
