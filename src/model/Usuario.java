@@ -14,7 +14,7 @@ public class Usuario implements Serializable, Comparable<Usuario> {
     private String nome;
     private String senha;
     private String tipo;
-    private Carrinho carrinho = new Carrinho();
+    private Cart carrinho = new Cart();
     private Date ultimaMensagem;
 
     public Usuario(String nome, String userName, String senha, String tipo) {
@@ -55,7 +55,7 @@ public class Usuario implements Serializable, Comparable<Usuario> {
         return nome;
     }
 
-    public Carrinho getCarrinho() {
+    public Cart getCarrinho() {
         return carrinho;
     }
 
@@ -75,7 +75,7 @@ public class Usuario implements Serializable, Comparable<Usuario> {
         this.nome = nome;
     }
 
-    public void setCarrinho(Carrinho pedidos) {
+    public void setCarrinho(Cart pedidos) {
         this.carrinho = pedidos;
     }
 
