@@ -2,6 +2,7 @@
 package controller.entregador;
 
 import controller.LoginController;
+import controller.StageController;
 import controller.usuario.TelaUsuarioController;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -19,7 +20,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -35,8 +35,6 @@ import javax.imageio.ImageIO;
 import model.Notificacao;
 import model.Supermercado;
 import model.Usuario;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class TelaEntregadorController implements Initializable {
 
@@ -60,52 +58,33 @@ public class TelaEntregadorController implements Initializable {
 
     @FXML
     public void notificacaoPedido(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/Entregas.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/Entregas.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void notificacaoPedido(MouseEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/Entregas.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/Entregas.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void pedidos(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/Entregas.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/Entregas.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void editarPerfil(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/EditarPerfil.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/EditarPerfil.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void removerEntregador(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        StageController.openScreen();
+
         for (Usuario u : Supermercado.getUsers()) {
             if (u.getNome().equals(LoginController.uN.getNome())) {
                 Supermercado.getUsers().remove(u);
@@ -116,12 +95,8 @@ public class TelaEntregadorController implements Initializable {
 
     @FXML
     public void sairDaConta(ActionEvent event) throws Exception {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        StageController.openScreen();
     }
 
     @Override

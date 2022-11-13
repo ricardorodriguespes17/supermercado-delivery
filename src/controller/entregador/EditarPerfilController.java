@@ -1,6 +1,7 @@
 package controller.entregador;
 
 import controller.LoginController;
+import controller.StageController;
 import controller.supermercado.CadastroController;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,7 +15,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -27,8 +27,6 @@ import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import model.Supermercado;
 import model.Usuario;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class EditarPerfilController implements Initializable {
 
@@ -88,12 +86,8 @@ public class EditarPerfilController implements Initializable {
         confirmacao.setResult(ButtonType.OK);
         confirmacao.showAndWait();
 
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
@@ -186,12 +180,8 @@ public class EditarPerfilController implements Initializable {
 
     @FXML
     public void cancelar(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
+        StageController.openScreen();
     }
 
     @Override

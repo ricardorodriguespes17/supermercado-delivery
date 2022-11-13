@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import controller.StageController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
@@ -19,8 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import model.Supermercado;
 import model.Usuario;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class RemoverEntregadorController implements Initializable {
 
@@ -65,12 +64,8 @@ public class RemoverEntregadorController implements Initializable {
 
     @FXML
     public void voltar(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        //Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
+        StageController.openScreen();
     }
 
     @Override
@@ -78,7 +73,7 @@ public class RemoverEntregadorController implements Initializable {
         carregarTabela();
     }
 
-    //Carrega a TableView com os dados dos usuários
+    // Carrega a TableView com os dados dos usuários
     public void carregarTabela() {
         observable = FXCollections.observableArrayList(Supermercado.getUsers());
 
@@ -88,9 +83,9 @@ public class RemoverEntregadorController implements Initializable {
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         tabela.setItems(observable);
 
-        //Formatando fonte da tabela
+        // Formatando fonte da tabela
         tabela.setStyle("-fx-font-size: 15px; -fx-font-family: Source Sans Pro Extra Light;");
-        //Selecionando primeiro item da tabela ao iniciar
+        // Selecionando primeiro item da tabela ao iniciar
         tabela.getSelectionModel().selectFirst();
 
         for (Usuario u : Supermercado.getUsers()) {

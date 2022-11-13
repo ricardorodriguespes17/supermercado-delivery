@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -27,8 +26,6 @@ import javafx.scene.input.MouseEvent;
 import model.Mensagem;
 import model.Supermercado;
 import model.Usuario;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class MensagensController implements Initializable {
 
@@ -110,19 +107,11 @@ public class MensagensController implements Initializable {
     @FXML
     public void voltar(ActionEvent event) throws IOException {
         if ("cliente".equals(LoginController.uN.getTipo())) {
-            Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
-            Scene cena = new Scene(root);
-            Principal.palco.setScene(cena);
-            Principal.palco.show();
-            // Colocar palco no centro da tela
-            Principal.palco.centerOnScreen();
+            StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
+            StageController.openScreen();
         } else {
-            Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
-            Scene cena = new Scene(root);
-            Principal.palco.setScene(cena);
-            Principal.palco.show();
-            // Colocar palco no centro da tela
-            Principal.palco.centerOnScreen();
+            StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
+            StageController.openScreen();
         }
     }
 

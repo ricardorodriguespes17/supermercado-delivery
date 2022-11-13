@@ -1,6 +1,8 @@
 package controller.usuario;
 
 import controller.LoginController;
+import controller.StageController;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,14 +12,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import model.Produto;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class VerCarrinhoController implements Initializable {
 
@@ -36,30 +35,22 @@ public class VerCarrinhoController implements Initializable {
 
     @FXML
     public void voltar(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        //Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void confirmar(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/ConfirmarPedido.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        //Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/ConfirmarPedido.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void remover(ActionEvent event) {
         Produto selectedItem = tabela.getSelectionModel().getSelectedItem();
-        
-        for(Produto p : LoginController.uN.getCarrinho().getProdutosSolicitados()){
-            if(selectedItem.equals(p)){
+
+        for (Produto p : LoginController.uN.getCarrinho().getProdutosSolicitados()) {
+            if (selectedItem.equals(p)) {
                 LoginController.uN.getCarrinho().getProdutosSolicitados().remove(p);
                 break;
             }
@@ -87,7 +78,7 @@ public class VerCarrinhoController implements Initializable {
 
         tabela.setItems(observable);
 
-        //Formatando fonte da tabela
+        // Formatando fonte da tabela
         tabela.setStyle("-fx-font-size: 12px; -fx-font-family: Source Sans Pro Extra Light;");
     }
 }

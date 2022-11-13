@@ -1,6 +1,8 @@
 package controller.usuario;
 
 import controller.LoginController;
+import controller.StageController;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +19,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -30,8 +31,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javax.imageio.ImageIO;
 import model.Notificacao;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class TelaUsuarioController implements Initializable {
 
@@ -56,52 +55,32 @@ public class TelaUsuarioController implements Initializable {
 
     @FXML
     public void abrirMensagens() throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/Mensagens.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/Mensagens.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void verCarrinho(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/VerCarrinho.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/VerCarrinho.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void editarPerfil(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/EditarPerfilCliente.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/EditarPerfilCliente.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void verProdutos(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/VerProduto.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/VerProduto.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void sairDaConta(ActionEvent event) throws Exception {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        StageController.openScreen();
     }
 
     @Override

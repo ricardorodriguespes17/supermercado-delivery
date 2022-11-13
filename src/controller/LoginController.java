@@ -10,8 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -30,7 +28,6 @@ public class LoginController implements Initializable {
     private Label alert;
 
     public static Usuario uN;
-    private Parent root = Principal.root;
 
     public void loginAceito(String type, String userName) {
         for (Usuario user : Supermercado.getUsers()) {
@@ -41,34 +38,24 @@ public class LoginController implements Initializable {
         switch (type) {
             case "admin":
                 try {
-                    root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
-                    Scene scene = new Scene(root);
-                    Principal.palco.setScene(scene);
-                    Principal.palco.show();
-                    Principal.palco.centerOnScreen();
+                    StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
+                    StageController.openScreen();
                     return;
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             case "cliente":
                 try {
-                    root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
-                    Scene scene = new Scene(root);
-                    Principal.palco.setScene(scene);
-                    Principal.palco.setTitle(userName);
-                    Principal.palco.show();
-                    Principal.palco.centerOnScreen();
+                    StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
+                    StageController.openScreen();
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return;
             case "entregador":
                 try {
-                    root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
-                    Scene scene = new Scene(root);
-                    Principal.palco.setScene(scene);
-                    Principal.palco.show();
-                    Principal.palco.centerOnScreen();
+                    StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
+                    StageController.openScreen();
                     return;
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -132,20 +119,14 @@ public class LoginController implements Initializable {
 
     @FXML
     public void createAccount(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/view/CriarConta.fxml"));
-        Scene scene = new Scene(root);
-        Principal.palco.setScene(scene);
-        Principal.palco.show();
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/CriarConta.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void forgotPassword(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/view/RedefinirSenha.fxml"));
-        Scene scene = new Scene(root);
-        Principal.palco.setScene(scene);
-        Principal.palco.show();
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/RedefinirSenha.fxml"));
+        StageController.openScreen();
     }
 
     public void clearUsername() {

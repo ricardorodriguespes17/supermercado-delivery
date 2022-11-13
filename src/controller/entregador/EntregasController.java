@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
+
+import controller.StageController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
@@ -20,8 +21,6 @@ import model.Notificacao;
 import model.Pedidos;
 import model.Produto;
 import model.Supermercado;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class EntregasController implements Initializable {
 
@@ -41,22 +40,22 @@ public class EntregasController implements Initializable {
         Pedidos selectedItem = tabela.getSelectionModel().getSelectedItem();
 
         for (Produto p : selectedItem.getProdutosPedidos()) {
-            //retira o produto do estoque
+            // retira o produto do estoque
             p.setQuant(p.getQuant() - 1);
-            //aumenta a quantidade de vezes comprada desse produto
+            // aumenta a quantidade de vezes comprada desse produto
             p.setNumeroVendido();
         }
-        
-        //ordena a lista de produtos
+
+        // ordena a lista de produtos
         Collections.sort(Supermercado.getProdutos());
 
         selectedItem.getProdutosPedidos().clear();
         Supermercado.getPedidos().remove(selectedItem);
 
-        //Atualizar os itens da tabela
+        // Atualizar os itens da tabela
         carregarTabela();
 
-        //Mandar notificação ao usuario
+        // Mandar notificação ao usuario
         Notificacao n = new Notificacao("Pedido está a caminho", selectedItem.getUser());
         selectedItem.getUser().getNotificacoes().add(n);
 
@@ -67,23 +66,15 @@ public class EntregasController implements Initializable {
         confirmacao.setResult(ButtonType.OK);
         confirmacao.showAndWait();
 
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        //Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
+        StageController.openScreen();
         Supermercado.getPedidos().remove(selectedItem);
     }
 
     @FXML
     public void voltar(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        //Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
+        StageController.openScreen();
     }
 
     @Override
@@ -91,7 +82,7 @@ public class EntregasController implements Initializable {
         carregarTabela();
     }
 
-    //Carrega os dados da tabela de entregas
+    // Carrega os dados da tabela de entregas
     public void carregarTabela() {
         observable = FXCollections.observableArrayList(Supermercado.getPedidos());
 
@@ -101,7 +92,7 @@ public class EntregasController implements Initializable {
 
         tabela.setItems(observable);
 
-        //Formatando fonte da tabela
+        // Formatando fonte da tabela
         tabela.setStyle("-fx-font-size: 12px; -fx-font-family: Source Sans Pro Extra Light;");
 
         for (Pedidos p : Supermercado.getPedidos()) {

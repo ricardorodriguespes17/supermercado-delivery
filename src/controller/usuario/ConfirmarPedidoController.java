@@ -1,6 +1,8 @@
 package controller.usuario;
 
 import controller.LoginController;
+import controller.StageController;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -8,14 +10,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import model.Pedidos;
 import model.Usuario;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class ConfirmarPedidoController implements Initializable {
 
@@ -57,24 +56,16 @@ public class ConfirmarPedidoController implements Initializable {
         u.setComplemento(complemento.getText());
 
         // volta para tela principal do usuario
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
+        StageController.openScreen();
     }
 
     // cancela o confirmamento do pedido
     @FXML
     public void cancelar(ActionEvent event) throws IOException {
         // volta para tela do carrinho
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/VerCarrinho.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/VerCarrinho.fxml"));
+        StageController.openScreen();
     }
 
     @Override

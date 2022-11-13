@@ -1,6 +1,8 @@
 package controller.usuario;
 
 import controller.LoginController;
+import controller.StageController;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Spinner;
@@ -23,8 +24,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import model.Produto;
 import model.Supermercado;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class VerProdutoController implements Initializable {
 
@@ -66,22 +65,14 @@ public class VerProdutoController implements Initializable {
 
     @FXML
     public void verCarrinho(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/VerCarrinho.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/VerCarrinho.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void voltar(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
+        StageController.openScreen();
     }
 
     // Pesquisa itens que tenha o mesmo nome que foi digitado no campo de texto

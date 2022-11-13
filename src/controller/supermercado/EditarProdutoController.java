@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Spinner;
@@ -24,9 +23,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import controller.StageController;
 import model.Produto;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class EditarProdutoController implements Initializable {
 
@@ -84,22 +82,14 @@ public class EditarProdutoController implements Initializable {
         confirmacao.setResult(ButtonType.OK);
         confirmacao.showAndWait();
 
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/ListaProduto.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/ListaProduto.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
     public void cancelar(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/ListaProduto.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/ListaProduto.fxml"));
+        StageController.openScreen();
     }
 
     @FXML

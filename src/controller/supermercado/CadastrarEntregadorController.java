@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -22,10 +21,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import controller.StageController;
 import model.Supermercado;
 import model.Usuario;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class CadastrarEntregadorController implements Initializable {
 
@@ -83,12 +81,8 @@ public class CadastrarEntregadorController implements Initializable {
         confirmacao.setResult(ButtonType.OK);
         confirmacao.showAndWait();
 
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
@@ -220,12 +214,8 @@ public class CadastrarEntregadorController implements Initializable {
     // Metodo para voltar a tela inicial do administrador
     @FXML
     public void sair(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
+        StageController.openScreen();
     }
 
     @Override

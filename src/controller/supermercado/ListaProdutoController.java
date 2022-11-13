@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import controller.StageController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -19,8 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import model.Produto;
 import model.Supermercado;
-import principal.Principal;
-import static principal.Principal.root;
 
 public class ListaProdutoController implements Initializable {
 
@@ -62,12 +60,8 @@ public class ListaProdutoController implements Initializable {
 
     @FXML
     public void voltar(ActionEvent event) throws IOException {
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
+        StageController.openScreen();
     }
 
     @FXML
@@ -79,12 +73,8 @@ public class ListaProdutoController implements Initializable {
             return;
         }
 
-        Principal.root = FXMLLoader.load(getClass().getResource("/view/EditarProduto.fxml"));
-        Scene cena = new Scene(root);
-        Principal.palco.setScene(cena);
-        Principal.palco.show();
-        // Colocar palco no centro da tela
-        Principal.palco.centerOnScreen();
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/EditarProduto.fxml"));
+        StageController.openScreen();
     }
 
     // Pesquisa itens que tenha o mesmo nome que foi digitado no campo de texto
