@@ -80,18 +80,14 @@
                   <Label styleClass="title" text="Supermercado Delivery - Login" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT">
-               <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#closeApp" styleClass="secondary-button" stylesheets="@../css/estilo.css" text="Fechar app">
-                     <font>
-                        <Font name="Source Sans Pro" size="14.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </HBox>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#closeApp" styleClass="primary-button" stylesheets="@../css/estilo.css" text="Fechar app">
+               <font>
+                  <Font name="Source Sans Pro" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </HBox>
    </top>

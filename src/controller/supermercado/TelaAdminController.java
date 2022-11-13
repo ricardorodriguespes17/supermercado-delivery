@@ -2,7 +2,6 @@ package controller.supermercado;
 
 import controller.LoginController;
 import controller.StageController;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +13,6 @@ import javafx.scene.control.Label;
 
 public class TelaAdminController implements Initializable {
 
-    // Campo de texto que titula a tela
     @FXML
     private Label logado;
 
@@ -68,7 +66,6 @@ public class TelaAdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Adicionando nome do usuario ao titulo
         logado.setText("Você está logado como " + LoginController.uN.getNome());
     }
 

@@ -8,23 +8,27 @@ BorderPane{
     -fx-background-color: SECONDARY_COLOR;
 }
 
-.header, .footer {
+.header {
     -fx-background-color: PRIMARY_COLOR;
     -fx-pref-width: 800;
     -fx-pref-height: 70;
 }
 
 .header HBox {
-    -fx-pref-width: 400;
+    -fx-pref-width: 800;
     -fx-padding: 0 10 0 10;
+}
+
+.header Button {
+    -fx-min-width: 150;
+    -fx-pref-height: 50;
+    -fx-padding: 0 10 0 10;
+    -fx-font-size: 20;
+    -fx-text-fill: LABEL_COLOR;
 }
 
 .header .title {
     -fx-font-size: 24;
-}
-
-.header HBox Button {
-    -fx-pref-width: 150;
 }
 
 .content {

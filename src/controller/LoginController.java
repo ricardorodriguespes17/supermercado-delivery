@@ -29,7 +29,7 @@ public class LoginController implements Initializable {
 
     public static Usuario uN;
 
-    public void loginAceito(String type, String userName) {
+    public void acceptLogin(String type, String userName) {
         for (Usuario user : Supermercado.getUsers()) {
             if (userName.equals(user.getUserName())) {
                 uN = user;
@@ -77,7 +77,7 @@ public class LoginController implements Initializable {
         for (Usuario user : Supermercado.getUsers()) {
             if (user.getUserName().equals(usernameText)) {
                 if (user.getSenha().equals(passwordText)) {
-                    loginAceito(user.getTipo(), user.getUserName());
+                    acceptLogin(user.getTipo(), user.getUserName());
                     return;
                 } else {
                     alert.setText("Senha incorreta");
@@ -144,7 +144,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private void closeApp(ActionEvent event) {
-        Principal.palco.close();
+        StageController.stage.close();
     }
 
     @Override
