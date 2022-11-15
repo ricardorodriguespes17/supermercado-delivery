@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import model.Cliente;
-import model.Pedidos;
+import model.Order;
 import principal.Principal;
 
 public class ConfirmarPedidoController implements Initializable {
@@ -32,7 +32,7 @@ public class ConfirmarPedidoController implements Initializable {
                 + "\n" + ref.getText();
 
         // criar novo pedido
-        new Pedidos(loggedUser, endereco);
+        new Order(loggedUser, endereco);
 
         // Notificacao n = new Notificacao("Pedido para ser confirmado", admin);
 

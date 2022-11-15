@@ -11,7 +11,7 @@ public class Supermercado implements Serializable {
     private Data<List<Cliente>> clientsData;
     private Data<List<Entregador>> deliveryPeopleData;
     private Data<List<Produto>> productsData;
-    private Data<List<Pedidos>> ordersData;
+    private Data<List<Order>> ordersData;
     private Data<List<Mensagem>> messagesData;
 
     public Supermercado() {
@@ -80,7 +80,7 @@ public class Supermercado implements Serializable {
         return deliveryPeopleData.getData();
     }
 
-    public List<Pedidos> getOrders() {
+    public List<Order> getOrders() {
         return ordersData.getData();
     }
 
@@ -104,7 +104,7 @@ public class Supermercado implements Serializable {
         productsData.getData().add(data);
     }
 
-    public void addOrder(Pedidos data) {
+    public void addOrder(Order data) {
         ordersData.getData().add(data);
     }
 

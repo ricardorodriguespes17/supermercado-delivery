@@ -16,26 +16,26 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Pedidos;
+import model.Order;
 import model.Produto;
 import principal.Principal;
 
 public class EntregasController implements Initializable {
 
     @FXML
-    private TableView<Pedidos> tabela = new TableView<>();
+    private TableView<Order> tabela = new TableView<>();
     @FXML
-    private TableColumn<Pedidos, String> endereco = new TableColumn<>();
+    private TableColumn<Order, String> endereco = new TableColumn<>();
     @FXML
-    private TableColumn<Pedidos, String> solicitado = new TableColumn<>();
+    private TableColumn<Order, String> solicitado = new TableColumn<>();
     @FXML
-    private TableColumn<Pedidos, String> dataHora = new TableColumn<>();
+    private TableColumn<Order, String> dataHora = new TableColumn<>();
 
-    private ObservableList<Pedidos> observable;
+    private ObservableList<Order> observable;
 
     @FXML
     public void confirmar(ActionEvent event) throws IOException {
-        Pedidos selectedItem = tabela.getSelectionModel().getSelectedItem();
+        Order selectedItem = tabela.getSelectionModel().getSelectedItem();
 
         for (Produto p : selectedItem.getProdutosPedidos()) {
             // retira o produto do estoque
@@ -93,8 +93,8 @@ public class EntregasController implements Initializable {
         // Formatando fonte da tabela
         tabela.setStyle("-fx-font-size: 12px; -fx-font-family: Source Sans Pro Extra Light;");
 
-        for (Pedidos p : Principal.supermarketData.getOrders()) {
-            if (!p.isConfirmado()) {
+        for (Order p : Principal.supermarketData.getOrders()) {
+            if (!p.isConfirmed()) {
                 tabela.getItems().remove(p);
             }
         }

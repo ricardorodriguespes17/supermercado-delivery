@@ -17,22 +17,22 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Cliente;
 import model.Notification;
-import model.Pedidos;
+import model.Order;
 import model.User;
 import principal.Principal;
 
 public class PedidosController implements Initializable {
 
     @FXML
-    private TableView<Pedidos> tabela = new TableView<>();
+    private TableView<Order> tabela = new TableView<>();
     @FXML
-    private TableColumn<Pedidos, String> nomeProdutos = new TableColumn<>();
+    private TableColumn<Order, String> nomeProdutos = new TableColumn<>();
     @FXML
-    private TableColumn<Pedidos, String> solicitado = new TableColumn<>();
+    private TableColumn<Order, String> solicitado = new TableColumn<>();
     @FXML
-    private TableColumn<Pedidos, String> dataHora = new TableColumn<>();
+    private TableColumn<Order, String> dataHora = new TableColumn<>();
 
-    private ObservableList<Pedidos> observable;
+    private ObservableList<Order> observable;
 
     @FXML
     public void voltar(ActionEvent event) throws IOException {
@@ -42,17 +42,16 @@ public class PedidosController implements Initializable {
 
     @FXML
     public void confirmar(ActionEvent event) {
-        Pedidos selectedItem = tabela.getSelectionModel().getSelectedItem();
-        selectedItem.setConfirmado(true);
+        Order selectedItem = tabela.getSelectionModel().getSelectedItem();
+        selectedItem.setConfirmed(true);
 
-        for (Pedidos p : tabela.getSelectionModel().getSelectedItems()) {
-            if (p.isConfirmado() == false) {
+        for (Order p : tabela.getSelectionModel().getSelectedItems()) {
+            if (p.isConfirmed() == false) {
                 tabela.getItems().remove(p);
             }
         }
 
-        // Mandar notificação para o usuario
-        new Notification("Pedido confirmado", selectedItem.getUser());
+        new Notification("Pedido confirmado", selectedItem.getUsername());
         for (User u : Principal.supermarketData.getUsers()) {
             if ("entregador".equals(u.getType())) {
                 // Notificacao notificarEntregador = new Notificacao("Um pedido para ser
@@ -68,15 +67,14 @@ public class PedidosController implements Initializable {
         confirmacao.setResult(ButtonType.OK);
         confirmacao.showAndWait();
 
-        // Atualizar tabela
         carregarTabela();
     }
 
     @FXML
     public void cancelar(ActionEvent event) {
-        Pedidos selectedItem = tabela.getSelectionModel().getSelectedItem();
+        Order selectedItem = tabela.getSelectionModel().getSelectedItem();
         for (Cliente u : Principal.supermarketData.getClients()) {
-            if (u.getName().equals(selectedItem.getUsuario())) {
+            if (u.getUsername().equals(selectedItem.getUsername())) {
                 u.getCart().getProdutosSolicitados().clear();
             }
         }
@@ -104,17 +102,16 @@ public class PedidosController implements Initializable {
     public void carregarTabela() {
         observable = FXCollections.observableArrayList(Principal.supermarketData.getOrders());
 
-        nomeProdutos.setCellValueFactory(new PropertyValueFactory<>("nomeProdutos"));
-        solicitado.setCellValueFactory(new PropertyValueFactory<>("usuario"));
-        dataHora.setCellValueFactory(new PropertyValueFactory<>("dataHora"));
+        nomeProdutos.setCellValueFactory(new PropertyValueFactory<>("productsName"));
+        solicitado.setCellValueFactory(new PropertyValueFactory<>("username"));
+        dataHora.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
 
         tabela.setItems(observable);
 
-        // Formatando fonte da tabela
         tabela.setStyle("-fx-font-size: 12px; -fx-font-family: Source Sans Pro Extra Light;");
 
-        for (Pedidos p : Principal.supermarketData.getOrders()) {
-            if (p.isConfirmado()) {
+        for (Order p : Principal.supermarketData.getOrders()) {
+            if (p.isConfirmed()) {
                 tabela.getItems().remove(p);
             }
         }
