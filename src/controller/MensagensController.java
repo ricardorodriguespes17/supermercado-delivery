@@ -20,19 +20,19 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import model.Mensagem;
-import model.Usuario;
+import model.User;
 import principal.Principal;
 
 public class MensagensController implements Initializable {
 
     @FXML
-    private TableView<Usuario> topicos = new TableView<>();
+    private TableView<User> topicos = new TableView<>();
     @FXML
-    private TableColumn<Usuario, ImageView> fotoUsuario = new TableColumn<>();
+    private TableColumn<User, ImageView> fotoUsuario = new TableColumn<>();
     @FXML
-    private TableColumn<Usuario, String> nomeUsuario = new TableColumn<>();
+    private TableColumn<User, String> nomeUsuario = new TableColumn<>();
 
-    private ObservableList<Usuario> observableUsuario;
+    private ObservableList<User> observableUsuario;
 
     @FXML
     TextArea mensagem;
@@ -70,7 +70,7 @@ public class MensagensController implements Initializable {
                 return;
             }
 
-            Usuario u = topicos.getSelectionModel().getSelectedItem();
+            User u = topicos.getSelectionModel().getSelectedItem();
 
             new Mensagem(mensagem.getText(),
                     LoginController.uN, u);
@@ -86,7 +86,7 @@ public class MensagensController implements Initializable {
             return;
         }
 
-        Usuario u = topicos.getSelectionModel().getSelectedItem();
+        User u = topicos.getSelectionModel().getSelectedItem();
 
         if (u == null) {
             return;
@@ -102,7 +102,7 @@ public class MensagensController implements Initializable {
 
     @FXML
     public void voltar(ActionEvent event) throws IOException {
-        if ("cliente".equals(LoginController.uN.getTipo())) {
+        if ("cliente".equals(LoginController.uN.getType())) {
             StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
             StageController.openScreen();
         } else {
@@ -113,8 +113,8 @@ public class MensagensController implements Initializable {
 
     @FXML
     public void abrirTopico(MouseEvent event) {
-        Usuario u = topicos.getSelectionModel().getSelectedItem();
-        mensagens.setText(u.getNome());
+        User u = topicos.getSelectionModel().getSelectedItem();
+        mensagens.setText(u.getName());
         for (Mensagem m : Principal.supermarketData.getMessages()) {
             if (m.getDestinatario().equals(u)) {
                 m.setVisto(true);
@@ -151,21 +151,21 @@ public class MensagensController implements Initializable {
 
         // Selecionar o primeiro topico de conversa
         topicos.getSelectionModel().selectFirst();
-        if (LoginController.uN.getTipo().equals("admin")) {
+        if (LoginController.uN.getType().equals("admin")) {
             topicos.getSelectionModel().selectNext();
         }
-        Usuario user = topicos.getSelectionModel().getSelectedItem();
-        mensagens.setText(user.getNome());
+        User user = topicos.getSelectionModel().getSelectedItem();
+        mensagens.setText(user.getName());
         carregarMensagens();
 
         // Tirar as mensagens de outros usuarios da tabela de mensagens
-        for (Usuario u : Principal.supermarketData.getUsers()) {
-            if (LoginController.uN.getUserName().equals("admin")) {
-                if (u.getUserName().equals("admin") || u.getTipo().equals("entregador")) {
+        for (User u : Principal.supermarketData.getUsers()) {
+            if (LoginController.uN.getUsername().equals("admin")) {
+                if (u.getUsername().equals("admin") || u.getType().equals("entregador")) {
                     topicos.getItems().remove(u);
                 }
             } else {
-                if (u.getTipo().equals("cliente") || u.getTipo().equals("entregador")) {
+                if (u.getType().equals("cliente") || u.getType().equals("entregador")) {
                     topicos.getItems().remove(u);
                 }
             }
@@ -183,20 +183,20 @@ public class MensagensController implements Initializable {
         conversa.setStyle("-fx-font-size: 15px; -fx-font-family: Source Sans Pro Extra Light;");
         // tabela.getSelectionModel().selectLast();
 
-        Usuario u = topicos.getSelectionModel().getSelectedItem();
-        Usuario a = LoginController.uN;
+        User u = topicos.getSelectionModel().getSelectedItem();
+        User a = LoginController.uN;
 
         for (Mensagem m : Principal.supermarketData.getMessages()) {
-            if (a.getUserName().equals("admin")) {
-                if (m.getDestinatario().getNome().equals(u.getNome())
-                        || m.getRemetente().getNome().equals(u.getNome())) {
+            if (a.getUsername().equals("admin")) {
+                if (m.getDestinatario().getName().equals(u.getName())
+                        || m.getRemetente().getName().equals(u.getName())) {
 
                 } else {
                     conversa.getItems().remove(m);
                 }
             } else {
-                if (m.getDestinatario().getNome().equals(a.getNome())
-                        || m.getRemetente().getNome().equals(a.getNome())) {
+                if (m.getDestinatario().getName().equals(a.getName())
+                        || m.getRemetente().getName().equals(a.getName())) {
 
                 } else {
                     conversa.getItems().remove(m);

@@ -26,7 +26,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import model.Entregador;
-import model.Usuario;
+import model.User;
 import principal.Principal;
 
 public class EditarPerfilController implements Initializable {
@@ -71,11 +71,11 @@ public class EditarPerfilController implements Initializable {
 
     @FXML
     public void confirmar(ActionEvent event) throws IOException {
-        entregador.setNome(nome.getText());
-        entregador.setUserName(nomeUsuario.getText());
+        entregador.setName(nome.getText());
+        entregador.setUsername(nomeUsuario.getText());
         entregador.setCpf(cpf.getText());
         entregador.setEmail(email.getText());
-        entregador.setSenha(senha.getText());
+        entregador.setPassword(senha.getText());
         if (arquivoImagem != null) {
             entregador.setImagem(arquivoImagem);
         }
@@ -104,8 +104,8 @@ public class EditarPerfilController implements Initializable {
 
     @FXML
     public void verificaNomeUsuario(KeyEvent event) {
-        for (Usuario u : Principal.supermarketData.getUsers()) {
-            if (u.getUserName().equals(nomeUsuario.getText())) {
+        for (User u : Principal.supermarketData.getUsers()) {
+            if (u.getUsername().equals(nomeUsuario.getText())) {
                 erroNomeUsuario.setVisible(true);
                 erroNomeUsuario.setText("Nome de Usuário já existe");
                 nomeUsuario.setStyle("-fx-border-color: red;");
@@ -188,13 +188,13 @@ public class EditarPerfilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         for (Entregador e : Principal.supermarketData.getDeliveryPeoples()) {
-            if (e.getNome().equals(LoginController.uN.getNome())) {
+            if (e.getName().equals(LoginController.uN.getName())) {
                 entregador = e;
                 break;
             }
         }
-        nome.setText(entregador.getNome());
-        nomeUsuario.setText(entregador.getUserName());
+        nome.setText(entregador.getName());
+        nomeUsuario.setText(entregador.getUsername());
         cpf.setText(entregador.getCpf());
         email.setText(entregador.getEmail());
         imagem.setImage(entregador.getImagem().getImage());

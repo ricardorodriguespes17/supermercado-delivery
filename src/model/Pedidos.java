@@ -11,7 +11,7 @@ import java.util.List;
 public class Pedidos implements Serializable {
     // ATRIBUTOS
     private double valorPedidos = 0;
-    private Usuario usuario;
+    private User usuario;
     private String dataHora;
     private String numProdutos;
     private String nomeProdutos = "";
@@ -20,7 +20,7 @@ public class Pedidos implements Serializable {
     private List<Produto> produtosPedidos = new ArrayList<>();
 
     // CONSTRUTOR
-    public Pedidos(Usuario usuario, String endereco) {
+    public Pedidos(Cliente client, String endereco) {
         // Receber e formatar a data e a hora do sistema
         // formato da data
         SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
@@ -30,7 +30,7 @@ public class Pedidos implements Serializable {
         Date dh = new Date();
 
         // dados do carrinho
-        Cart c = LoginController.uN.getCarrinho();
+        Cart c = client.getCart();
         for (Produto p : c.getProdutosSolicitados()) {
             this.nomeProdutos += p.getNome() + "\n\n";
             this.produtosPedidos.add(p);
@@ -39,7 +39,7 @@ public class Pedidos implements Serializable {
         this.endereco = endereco;
         this.numProdutos = c.getProdutosSolicitados().size() + " produtos";
         this.valorPedidos = c.getValor();
-        this.usuario = usuario;
+        this.usuario = client;
         this.dataHora = formatoHora.format(dh) + " - " + formatoData.format(dh);
         Principal.supermarketData.addOrder(this);
     }
@@ -54,14 +54,14 @@ public class Pedidos implements Serializable {
     }
 
     public String getUsuario() {
-        return usuario.getNome();
+        return usuario.getName();
     }
 
-    public Usuario getUser() {
+    public User getUser() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(User usuario) {
         this.usuario = usuario;
     }
 

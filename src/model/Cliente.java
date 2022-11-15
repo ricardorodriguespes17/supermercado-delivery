@@ -11,11 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-public class Cliente extends Usuario {
+public class Cliente extends User {
   private String cpf;
   private String email;
   private String urlImagem;
   private Endereco endereco;
+  private Cart cart;
 
   public Cliente(String name, String username, String password, String cpf, String email, File image) {
     super(name, username, password, "cliente");
@@ -31,6 +32,7 @@ public class Cliente extends Usuario {
     this.email = email;
     this.endereco = new Endereco();
     this.urlImagem = salvarImage.toString();
+    this.cart = new Cart(username);
   }
 
   public String getCpf() {
@@ -128,6 +130,14 @@ public class Cliente extends Usuario {
 
   public void setUrlImagem(String urlImagem) {
     this.urlImagem = urlImagem;
+  }
+
+  public Cart getCart() {
+    return cart;
+  }
+
+  public void setCart(Cart cart) {
+    this.cart = cart;
   }
 
 }

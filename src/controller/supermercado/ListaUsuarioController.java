@@ -15,23 +15,23 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import model.Usuario;
+import model.User;
 import principal.Principal;
 
 public class ListaUsuarioController implements Initializable {
 
     @FXML
-    private TableView<Usuario> tabela = new TableView<>();
+    private TableView<User> tabela = new TableView<>();
     @FXML
-    private TableColumn<Usuario, ImageView> imagem = new TableColumn<>();
+    private TableColumn<User, ImageView> imagem = new TableColumn<>();
     @FXML
-    private TableColumn<Usuario, String> nome = new TableColumn<>();
+    private TableColumn<User, String> nome = new TableColumn<>();
     @FXML
-    private TableColumn<Usuario, String> cpf = new TableColumn<>();
+    private TableColumn<User, String> cpf = new TableColumn<>();
     @FXML
-    private TableColumn<Usuario, String> email = new TableColumn<>();
+    private TableColumn<User, String> email = new TableColumn<>();
 
-    private ObservableList<Usuario> observable;
+    private ObservableList<User> observable;
 
     @FXML
     public void voltar(ActionEvent event) throws IOException {

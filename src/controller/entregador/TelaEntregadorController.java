@@ -33,7 +33,7 @@ import javafx.scene.shape.Rectangle;
 import javax.imageio.ImageIO;
 import model.Entregador;
 import model.Notification;
-import model.Usuario;
+import model.User;
 import principal.Principal;
 
 public class TelaEntregadorController implements Initializable {
@@ -86,8 +86,8 @@ public class TelaEntregadorController implements Initializable {
         StageController.root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         StageController.openScreen();
 
-        for (Usuario u : Principal.supermarketData.getUsers()) {
-            if (u.getNome().equals(LoginController.uN.getNome())) {
+        for (User u : Principal.supermarketData.getUsers()) {
+            if (u.getUsername().equals(LoginController.uN.getUsername())) {
                 Principal.supermarketData.getUsers().remove(u);
                 break;
             }
@@ -102,7 +102,7 @@ public class TelaEntregadorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        logado.setText(LoginController.uN.getNome());
+        logado.setText(LoginController.uN.getName());
         carregarFotoPerfil();
         try {
             carregarNotificacao();

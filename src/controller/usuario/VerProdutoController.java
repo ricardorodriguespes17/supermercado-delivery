@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import model.Cliente;
 import model.Produto;
 import principal.Principal;
 
@@ -50,8 +51,8 @@ public class VerProdutoController implements Initializable {
     @FXML
     public void adicionarAoCarrinho(ActionEvent event) {
         Produto selectedItem = tabela.getSelectionModel().getSelectedItem();
-        for (int i = 0; i < (int) quant.getValue(); i++) {
-            LoginController.uN.getCarrinho().getProdutosSolicitados().add(selectedItem);
+        for (int i = 0; i < quant.getValue(); i++) {
+            ((Cliente) LoginController.uN).getCart().getProdutosSolicitados().add(selectedItem);
         }
 
         Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);

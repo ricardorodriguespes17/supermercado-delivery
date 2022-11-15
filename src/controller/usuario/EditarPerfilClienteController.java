@@ -26,7 +26,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import model.Cliente;
-import model.Usuario;
+import model.User;
 import principal.Principal;
 
 public class EditarPerfilClienteController implements Initializable {
@@ -75,11 +75,11 @@ public class EditarPerfilClienteController implements Initializable {
 
     @FXML
     public void confirmar(ActionEvent event) throws IOException {
-        cliente.setNome(nome.getText());
-        cliente.setUserName(nomeUsuario.getText());
+        cliente.setName(nome.getText());
+        cliente.setUsername(nomeUsuario.getText());
         cliente.setCpf(cpf.getText());
         cliente.setEmail(email.getText());
-        cliente.setSenha(senha.getText());
+        cliente.setPassword(senha.getText());
         if (arquivoImagem != null) {
             cliente.setImagem(arquivoImagem);
         }
@@ -112,8 +112,8 @@ public class EditarPerfilClienteController implements Initializable {
 
     @FXML
     public void verificaNomeUsuario(KeyEvent event) {
-        for (Usuario u : Principal.supermarketData.getUsers()) {
-            if (u.getUserName().equals(nomeUsuario.getText())) {
+        for (User u : Principal.supermarketData.getUsers()) {
+            if (u.getUsername().equals(nomeUsuario.getText())) {
                 erroNomeUsuario.setVisible(true);
                 erroNomeUsuario.setText("Nome de Usuário já existe");
                 nomeUsuario.setStyle("-fx-border-color: red;"
@@ -217,8 +217,8 @@ public class EditarPerfilClienteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        nome.setText(cliente.getNome());
-        nomeUsuario.setText(cliente.getUserName());
+        nome.setText(cliente.getName());
+        nomeUsuario.setText(cliente.getUsername());
         cpf.setText(cliente.getCpf());
         email.setText(cliente.getEmail());
         imagem.setImage(cliente.getImagem().getImage());

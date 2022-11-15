@@ -1,7 +1,6 @@
 
 package model;
 
-import controller.LoginController;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +10,8 @@ public class Cart implements Serializable {
     private String username;
     private List<Produto> items = new ArrayList<>();
 
-    public Cart() {
-        username = LoginController.uN.getUserName();
+    public Cart(String username) {
+        this.username = username;
         items = new ArrayList<>();
     }
 

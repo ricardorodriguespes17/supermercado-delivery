@@ -89,7 +89,7 @@ public class TelaUsuarioController implements Initializable {
         // ex.printStackTrace();
         // }
 
-        logado.setText(LoginController.uN.getNome());
+        logado.setText(LoginController.uN.getName());
     }
 
     // public void carregarNotificacao() throws FileNotFoundException {

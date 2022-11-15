@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import model.Cliente;
 import model.Produto;
 
 public class VerCarrinhoController implements Initializable {
@@ -49,9 +50,9 @@ public class VerCarrinhoController implements Initializable {
     public void remover(ActionEvent event) {
         Produto selectedItem = tabela.getSelectionModel().getSelectedItem();
 
-        for (Produto p : LoginController.uN.getCarrinho().getProdutosSolicitados()) {
+        for (Produto p : ((Cliente) LoginController.uN).getCart().getProdutosSolicitados()) {
             if (selectedItem.equals(p)) {
-                LoginController.uN.getCarrinho().getProdutosSolicitados().remove(p);
+                ((Cliente) LoginController.uN).getCart().getProdutosSolicitados().remove(p);
                 break;
             }
         }
@@ -69,7 +70,8 @@ public class VerCarrinhoController implements Initializable {
     }
 
     public void carregarTabela() {
-        observable = FXCollections.observableArrayList(LoginController.uN.getCarrinho().getProdutosSolicitados());
+        observable = FXCollections
+                .observableArrayList(((Cliente) LoginController.uN).getCart().getProdutosSolicitados());
 
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         imagem.setCellValueFactory(new PropertyValueFactory<>("imagem"));

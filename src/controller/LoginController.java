@@ -14,7 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import model.Usuario;
+import model.User;
 import principal.Principal;
 
 public class LoginController implements Initializable {
@@ -26,11 +26,11 @@ public class LoginController implements Initializable {
     @FXML
     private Label alert;
 
-    public static Usuario uN;
+    public static User uN;
 
     public void acceptLogin(String type, String userName) {
-        for (Usuario user : Principal.supermarketData.getUsers()) {
-            if (userName.equals(user.getUserName())) {
+        for (User user : Principal.supermarketData.getUsers()) {
+            if (userName.equals(user.getUsername())) {
                 uN = user;
             }
         }
@@ -73,10 +73,10 @@ public class LoginController implements Initializable {
             return;
         }
 
-        for (Usuario user : Principal.supermarketData.getUsers()) {
-            if (user.getUserName().equals(usernameText)) {
-                if (user.getSenha().equals(passwordText)) {
-                    acceptLogin(user.getTipo(), user.getUserName());
+        for (User user : Principal.supermarketData.getUsers()) {
+            if (user.getUsername().equals(usernameText)) {
+                if (user.getPassword().equals(passwordText)) {
+                    acceptLogin(user.getType(), user.getUsername());
                     return;
                 } else {
                     alert.setText("Senha incorreta");

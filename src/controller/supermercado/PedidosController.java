@@ -15,9 +15,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.Cliente;
 import model.Notification;
 import model.Pedidos;
-import model.Usuario;
+import model.User;
 import principal.Principal;
 
 public class PedidosController implements Initializable {
@@ -52,8 +53,8 @@ public class PedidosController implements Initializable {
 
         // Mandar notificação para o usuario
         new Notification("Pedido confirmado", selectedItem.getUser());
-        for (Usuario u : Principal.supermarketData.getUsers()) {
-            if ("entregador".equals(u.getTipo())) {
+        for (User u : Principal.supermarketData.getUsers()) {
+            if ("entregador".equals(u.getType())) {
                 // Notificacao notificarEntregador = new Notificacao("Um pedido para ser
                 // entregue", u);
                 // u.getNotificacoes().add(notificarEntregador);
@@ -74,9 +75,9 @@ public class PedidosController implements Initializable {
     @FXML
     public void cancelar(ActionEvent event) {
         Pedidos selectedItem = tabela.getSelectionModel().getSelectedItem();
-        for (Usuario u : Principal.supermarketData.getUsers()) {
-            if (u.getNome().equals(selectedItem.getUsuario())) {
-                u.getCarrinho().getProdutosSolicitados().clear();
+        for (Cliente u : Principal.supermarketData.getClients()) {
+            if (u.getName().equals(selectedItem.getUsuario())) {
+                u.getCart().getProdutosSolicitados().clear();
             }
         }
 

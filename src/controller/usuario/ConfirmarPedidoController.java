@@ -33,7 +33,7 @@ public class ConfirmarPedidoController implements Initializable {
                 + "\n" + ref.getText();
 
         // criar novo pedido
-        new Pedidos(LoginController.uN, endereco);
+        new Pedidos((Cliente) LoginController.uN, endereco);
 
         // Notificacao n = new Notificacao("Pedido para ser confirmado", admin);
 
@@ -46,7 +46,7 @@ public class ConfirmarPedidoController implements Initializable {
         confirmacao.showAndWait();
 
         // limpa o carrinho do usuario
-        LoginController.uN.getCarrinho().getProdutosSolicitados().clear();
+        ((Cliente) LoginController.uN).getCart().getProdutosSolicitados().clear();
 
         // Salvar os dados residenciais escolhido pelo cliente
 

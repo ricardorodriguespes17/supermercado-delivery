@@ -18,7 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import model.Entregador;
-import model.Usuario;
+import model.User;
 import principal.Principal;
 
 public class RemoverEntregadorController implements Initializable {
@@ -89,8 +89,8 @@ public class RemoverEntregadorController implements Initializable {
         // Selecionando primeiro item da tabela ao iniciar
         tabela.getSelectionModel().selectFirst();
 
-        for (Usuario u : Principal.supermarketData.getUsers()) {
-            if (!"entregador".equals(u.getTipo())) {
+        for (User u : Principal.supermarketData.getUsers()) {
+            if (!"entregador".equals(u.getType())) {
                 tabela.getItems().remove(u);
             }
         }

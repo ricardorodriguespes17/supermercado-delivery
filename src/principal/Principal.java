@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import model.Supermercado;
-import model.Usuario;
+import model.User;
 
 public class Principal extends Application {
 
@@ -27,14 +27,14 @@ public class Principal extends Application {
 
     public static void criarAdmin() {
         int i = 0;
-        for (Usuario u : supermarketData.getUsers()) {
-            if (u.getNome().equals("Administrador")) {
+        for (User u : supermarketData.getUsers()) {
+            if (u.getType().equals("admin")) {
                 i++;
                 break;
             }
         }
         if (i == 0) {
-            new Usuario("Administrador", "admin", "admin", "admin");
+            new User("Administrador", "admin", "admin", "admin");
         }
     }
 }

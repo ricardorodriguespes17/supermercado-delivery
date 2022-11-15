@@ -9,20 +9,20 @@ import principal.Principal;
 public class Mensagem implements Serializable {
     // ATRIBUTOS
     private String m1;
-    private Usuario remetente;
-    private Usuario destinatario;
+    private User remetente;
+    private User destinatario;
     private Date horario;
     private boolean visto;
 
     // CONSTRUTOR
-    public Mensagem(String mensagem, Usuario remetente, Usuario destinatario) {
+    public Mensagem(String mensagem, User remetente, User destinatario) {
         this.m1 = mensagem;
         this.remetente = remetente;
         this.destinatario = destinatario;
         this.visto = false;
         horario = new Date();
-        remetente.setUltimaMensagem(horario);
-        destinatario.setUltimaMensagem(horario);
+        remetente.setLastMessageDate(horario);
+        destinatario.setLastMessageDate(horario);
         new Notification("Mensagem de " + remetente, destinatario);
         Principal.supermarketData.addMessage(this);
     }
@@ -31,7 +31,7 @@ public class Mensagem implements Serializable {
     public Label getM1() {
         Label m1 = new Label();
         m1.setPadding(new Insets(12, 17, 12, 17));
-        if (this.remetente.getUserName().equals("admin")) {
+        if (this.remetente.getUsername().equals("admin")) {
             m1.setStyle("-fx-background-color: #F5F5F5;"
                     + "-fx-text-fill: black;"
                     + "-fx-border-radius: 50;"
@@ -51,19 +51,19 @@ public class Mensagem implements Serializable {
         this.m1 = m1;
     }
 
-    public Usuario getRemetente() {
+    public User getRemetente() {
         return remetente;
     }
 
-    public void setRemetente(Usuario remetente) {
+    public void setRemetente(User remetente) {
         this.remetente = remetente;
     }
 
-    public Usuario getDestinatario() {
+    public User getDestinatario() {
         return destinatario;
     }
 
-    public void setDestinatario(Usuario destinatario) {
+    public void setDestinatario(User destinatario) {
         this.destinatario = destinatario;
     }
 

@@ -36,7 +36,7 @@ public class Supermercado implements Serializable {
         messagesData.loadData();
     }
 
-    public List<Usuario> getUsers() {
+    public List<User> getUsers() {
         return usersData.getData();
     }
 
@@ -60,7 +60,7 @@ public class Supermercado implements Serializable {
         return messagesData.getData();
     }
 
-    public void addUser(Usuario newUser) {
+    public void addUser(User newUser) {
         usersData.addData(newUser);
     }
 

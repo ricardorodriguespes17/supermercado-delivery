@@ -7,10 +7,10 @@ public class Notification implements Serializable {
     private boolean viewed;
     private String username;
 
-    public Notification(String content, Usuario usuario) {
+    public Notification(String content, User usuario) {
         this.content = content;
         this.viewed = false;
-        this.username = usuario.getUserName();
+        this.username = usuario.getUsername();
     }
 
     public String getInfo() {

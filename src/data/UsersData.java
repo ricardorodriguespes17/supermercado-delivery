@@ -1,8 +1,8 @@
 package data;
 
-import model.Usuario;
+import model.User;
 
-public class UsersData extends Data<Usuario> {
+public class UsersData extends Data<User> {
 
   public UsersData(String fileName) {
     super(fileName);

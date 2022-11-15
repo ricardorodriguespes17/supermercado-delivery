@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-public class Entregador extends Usuario {
+public class Entregador extends User {
   private String cpf;
   private String email;
   private String urlImagem;

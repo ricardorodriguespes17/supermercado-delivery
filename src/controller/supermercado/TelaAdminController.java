@@ -66,7 +66,7 @@ public class TelaAdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        logado.setText("Você está logado como " + LoginController.uN.getNome());
+        logado.setText("Você está logado como " + LoginController.uN.getName());
     }
 
 }

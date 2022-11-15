@@ -26,7 +26,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import model.Cliente;
-import model.Usuario;
+import model.User;
 import principal.Principal;
 
 public class CriarContaController implements Initializable {
@@ -130,8 +130,8 @@ public class CriarContaController implements Initializable {
 
     @FXML
     public void verificaNomeUsuario(KeyEvent event) {
-        for (Usuario u : Principal.supermarketData.getUsers()) {
-            if (u.getUserName().equals(nomeUsuario.getText())) {
+        for (User u : Principal.supermarketData.getUsers()) {
+            if (u.getUsername().equals(nomeUsuario.getText())) {
                 erroNomeUsuario.setVisible(true);
                 erroNomeUsuario.setText("Nome de Usuário já existe");
                 nomeUsuario.setStyle("-fx-background-color: #FFFFFF;\n" +
