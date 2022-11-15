@@ -1,6 +1,5 @@
 package controller.entregador;
 
-import controller.LoginController;
 import controller.StageController;
 import controller.supermercado.CadastroController;
 import java.awt.image.BufferedImage;
@@ -35,19 +34,15 @@ public class EditarPerfilController implements Initializable {
     private TextField nome, cpf, email, nomeUsuario;
     @FXML
     private PasswordField senha;
-
     @FXML
     private ImageView imagem = new ImageView();
-
     @FXML
     private Label erroNome, erroNomeUsuario, erroSenha, erroEmail, erroCpf;
 
-    Entregador entregador;
+    private FileChooser fc = new FileChooser();
+    private File arquivoImagem = new File("src/imagens/usuario.png");
 
-    // Declaração do selecionador de arquivo
-    FileChooser fc = new FileChooser();
-    // Declaração e inicialização do arquivo onde irá receber o arquivo selecionado
-    File arquivoImagem = new File("src/imagens/usuario.png");
+    private Entregador loggedUser = (Entregador) Principal.supermarketData.getLoggedUser();
 
     // Metodo que seleciona uma imagem em algum diretório do computador
     @FXML
@@ -56,7 +51,7 @@ public class EditarPerfilController implements Initializable {
         arquivoImagem = fc.showOpenDialog(null);
 
         if (arquivoImagem == null) {
-            arquivoImagem = new File(entregador.getUrlImagem());
+            arquivoImagem = new File(loggedUser.getUrlImagem());
             return;
         }
 
@@ -71,13 +66,13 @@ public class EditarPerfilController implements Initializable {
 
     @FXML
     public void confirmar(ActionEvent event) throws IOException {
-        entregador.setName(nome.getText());
-        entregador.setUsername(nomeUsuario.getText());
-        entregador.setCpf(cpf.getText());
-        entregador.setEmail(email.getText());
-        entregador.setPassword(senha.getText());
+        loggedUser.setName(nome.getText());
+        loggedUser.setUsername(nomeUsuario.getText());
+        loggedUser.setCpf(cpf.getText());
+        loggedUser.setEmail(email.getText());
+        loggedUser.setPassword(senha.getText());
         if (arquivoImagem != null) {
-            entregador.setImagem(arquivoImagem);
+            loggedUser.setImagem(arquivoImagem);
         }
 
         Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
@@ -187,16 +182,10 @@ public class EditarPerfilController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        for (Entregador e : Principal.supermarketData.getDeliveryPeoples()) {
-            if (e.getName().equals(LoginController.uN.getName())) {
-                entregador = e;
-                break;
-            }
-        }
-        nome.setText(entregador.getName());
-        nomeUsuario.setText(entregador.getUsername());
-        cpf.setText(entregador.getCpf());
-        email.setText(entregador.getEmail());
-        imagem.setImage(entregador.getImagem().getImage());
+        nome.setText(loggedUser.getName());
+        nomeUsuario.setText(loggedUser.getUsername());
+        cpf.setText(loggedUser.getCpf());
+        email.setText(loggedUser.getEmail());
+        imagem.setImage(loggedUser.getImagem().getImage());
     }
 }

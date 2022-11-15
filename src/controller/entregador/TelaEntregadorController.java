@@ -1,7 +1,5 @@
-
 package controller.entregador;
 
-import controller.LoginController;
 import controller.StageController;
 import controller.usuario.TelaUsuarioController;
 import java.awt.image.BufferedImage;
@@ -42,19 +40,16 @@ public class TelaEntregadorController implements Initializable {
     private Label logado;
     @FXML
     private ImageView fotoPerfil = new ImageView();
-
     @FXML
     private MenuButton menu = new MenuButton();
-
     @FXML
     private TableView<Notification> not = new TableView<>();
     @FXML
     private TableColumn<Notification, String> info = new TableColumn<>();
-
     @FXML
     private ImageView iconeNot = new ImageView();
 
-    private Entregador loggedUser = (Entregador) LoginController.uN;
+    private Entregador loggedUser = (Entregador) Principal.supermarketData.getLoggedUser();
     private ObservableList<Notification> obs;
 
     @FXML
@@ -87,7 +82,7 @@ public class TelaEntregadorController implements Initializable {
         StageController.openScreen();
 
         for (User u : Principal.supermarketData.getUsers()) {
-            if (u.getUsername().equals(LoginController.uN.getUsername())) {
+            if (u.getUsername().equals(loggedUser.getUsername())) {
                 Principal.supermarketData.getUsers().remove(u);
                 break;
             }
@@ -102,7 +97,7 @@ public class TelaEntregadorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        logado.setText(LoginController.uN.getName());
+        logado.setText(loggedUser.getName());
         carregarFotoPerfil();
         try {
             carregarNotificacao();

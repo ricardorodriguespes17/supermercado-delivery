@@ -11,12 +11,27 @@ import data.UsersData;
 
 public class Supermercado implements Serializable {
 
+    private User loggedUser;
+
     private UsersData usersData = new UsersData("users");
     private ClientsData clientsData = new ClientsData("clients");
     private DeliveryPeoplesData deliveryPeopleData = new DeliveryPeoplesData("delivery-peoples");
     private ProductsData productsData = new ProductsData("products");
     private OrdersData ordersData = new OrdersData("orders");
     private MessagesData messagesData = new MessagesData("messages");
+
+    public Supermercado() {
+        loggedUser = null;
+        loadDatas();
+    }
+
+    public User getLoggedUser() {
+        return loggedUser;
+    }
+
+    public void setLoggedUser(User loggedUser) {
+        this.loggedUser = loggedUser;
+    }
 
     public void saveDatas() {
         usersData.saveData();
@@ -34,6 +49,14 @@ public class Supermercado implements Serializable {
         productsData.loadData();
         ordersData.loadData();
         messagesData.loadData();
+
+        createAdmin();
+    }
+
+    public void createAdmin() {
+        if (getUsers().size() == 0) {
+            new User("Administrador", "admin", "admin", User.TYPE_ADMIN);
+        }
     }
 
     public List<User> getUsers() {

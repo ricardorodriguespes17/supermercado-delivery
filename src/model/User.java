@@ -16,6 +16,9 @@ public class User implements Serializable, Comparable<User> {
     private String password;
     private String type;
     private Date lastMessageDate;
+    public static String TYPE_ADMIN = "admin";
+    public static String TYPE_CLIENT = "client";
+    public static String TYPE_DELIVERY_PEOPLE = "delivery-people";
 
     public User(String name, String username, String password, String type) {
         this.name = name;

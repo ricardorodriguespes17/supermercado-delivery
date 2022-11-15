@@ -1,6 +1,5 @@
 package controller.usuario;
 
-import controller.LoginController;
 import controller.StageController;
 import java.io.IOException;
 import java.net.URL;
@@ -39,20 +38,19 @@ public class VerProdutoController implements Initializable {
     private TableColumn<Produto, String> valor = new TableColumn<>();
     @FXML
     private TableColumn<Produto, Integer> quantidade = new TableColumn<>();
-
-    private ObservableList<Produto> observable;
-
     @FXML
     private Spinner<Integer> quant;
-
     @FXML
     private TextField caixaPesquisa;
+
+    private ObservableList<Produto> observable;
+    private Cliente loggedUser = (Cliente) Principal.supermarketData.getLoggedUser();
 
     @FXML
     public void adicionarAoCarrinho(ActionEvent event) {
         Produto selectedItem = tabela.getSelectionModel().getSelectedItem();
         for (int i = 0; i < quant.getValue(); i++) {
-            ((Cliente) LoginController.uN).getCart().getProdutosSolicitados().add(selectedItem);
+            loggedUser.getCart().getProdutosSolicitados().add(selectedItem);
         }
 
         Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);

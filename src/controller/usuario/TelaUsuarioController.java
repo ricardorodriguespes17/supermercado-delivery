@@ -1,8 +1,6 @@
 package controller.usuario;
 
-import controller.LoginController;
 import controller.StageController;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,27 +26,24 @@ import javax.imageio.ImageIO;
 
 import model.Cliente;
 import model.Notification;
+import principal.Principal;
 
 public class TelaUsuarioController implements Initializable {
 
     @FXML
     private Label logado;
-
     @FXML
     private final ImageView fotoPerfil = new ImageView();
-
     @FXML
     private final MenuButton menu = new MenuButton();
-
     @FXML
     private final TableView<Notification> not = new TableView<>();
     @FXML
     private final TableColumn<Notification, String> info = new TableColumn<>();
-
     @FXML
     private ImageView iconeNot = new ImageView();
 
-    public Cliente loggedClient = (Cliente) LoginController.uN;
+    private Cliente loggedUser = (Cliente) Principal.supermarketData.getLoggedUser();
 
     @FXML
     public void abrirMensagens() throws IOException {
@@ -89,12 +84,12 @@ public class TelaUsuarioController implements Initializable {
         // ex.printStackTrace();
         // }
 
-        logado.setText(LoginController.uN.getName());
+        logado.setText(loggedUser.getName());
     }
 
     // public void carregarNotificacao() throws FileNotFoundException {
     // obs =
-    // FXCollections.observableArrayList(LoginController.uN.getNotificacoes());
+    // FXCollections.observableArrayList(loggedUser.getNotificacoes());
     // info.setCellValueFactory(new PropertyValueFactory<>("info"));
     // not.setItems(obs);
 
@@ -116,14 +111,14 @@ public class TelaUsuarioController implements Initializable {
     // }
 
     public void carregarFotoPerfil() {
-        File arquivo = new File(loggedClient.getUrlImagem());
+        File arquivo = new File(loggedUser.getUrlImagem());
         BufferedImage bufferedImage;
         Image image = null;
         try {
             if (!arquivo.exists()) {
                 // SE NAO EXISTIR IMAGEM NO DIRETORIO, USUARA IMAGEM GENERICA
-                loggedClient.setUrlImagem("src/imagens/usuario.png");
-                arquivo = new File(loggedClient.getUrlImagem());
+                loggedUser.setUrlImagem("src/imagens/usuario.png");
+                arquivo = new File(loggedUser.getUrlImagem());
             }
             bufferedImage = ImageIO.read(arquivo);
             image = SwingFXUtils.toFXImage(bufferedImage, null);

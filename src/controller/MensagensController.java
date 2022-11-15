@@ -31,20 +31,17 @@ public class MensagensController implements Initializable {
     private TableColumn<User, ImageView> fotoUsuario = new TableColumn<>();
     @FXML
     private TableColumn<User, String> nomeUsuario = new TableColumn<>();
-
-    private ObservableList<User> observableUsuario;
-
     @FXML
     TextArea mensagem;
-
     @FXML
     private TableView<Mensagem> conversa = new TableView<>();
     @FXML
     private TableColumn<Mensagem, Label> mensagens = new TableColumn<>();
 
+    private ObservableList<User> observableUsuario;
     private ObservableList<Mensagem> observableMensagem;
-
-    int j = 0;
+    private int j = 0;
+    private User loggedUser = Principal.supermarketData.getLoggedUser();
 
     @FXML
     public void quebra(KeyEvent event) {
@@ -73,7 +70,7 @@ public class MensagensController implements Initializable {
             User u = topicos.getSelectionModel().getSelectedItem();
 
             new Mensagem(mensagem.getText(),
-                    LoginController.uN, u);
+                    loggedUser, u);
 
             mensagem.clear();
             carregarMensagens();
@@ -92,7 +89,7 @@ public class MensagensController implements Initializable {
             return;
         }
 
-        new Mensagem(mensagem.getText(), LoginController.uN, u);
+        new Mensagem(mensagem.getText(), loggedUser, u);
 
         mensagem.clear();
         mensagem.setFocusTraversable(true);
@@ -102,7 +99,7 @@ public class MensagensController implements Initializable {
 
     @FXML
     public void voltar(ActionEvent event) throws IOException {
-        if ("cliente".equals(LoginController.uN.getType())) {
+        if ("cliente".equals(loggedUser.getType())) {
             StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
             StageController.openScreen();
         } else {
@@ -151,7 +148,7 @@ public class MensagensController implements Initializable {
 
         // Selecionar o primeiro topico de conversa
         topicos.getSelectionModel().selectFirst();
-        if (LoginController.uN.getType().equals("admin")) {
+        if (loggedUser.getType().equals("admin")) {
             topicos.getSelectionModel().selectNext();
         }
         User user = topicos.getSelectionModel().getSelectedItem();
@@ -160,7 +157,7 @@ public class MensagensController implements Initializable {
 
         // Tirar as mensagens de outros usuarios da tabela de mensagens
         for (User u : Principal.supermarketData.getUsers()) {
-            if (LoginController.uN.getUsername().equals("admin")) {
+            if (loggedUser.getUsername().equals("admin")) {
                 if (u.getUsername().equals("admin") || u.getType().equals("entregador")) {
                     topicos.getItems().remove(u);
                 }
@@ -184,7 +181,7 @@ public class MensagensController implements Initializable {
         // tabela.getSelectionModel().selectLast();
 
         User u = topicos.getSelectionModel().getSelectedItem();
-        User a = LoginController.uN;
+        User a = loggedUser;
 
         for (Mensagem m : Principal.supermarketData.getMessages()) {
             if (a.getUsername().equals("admin")) {

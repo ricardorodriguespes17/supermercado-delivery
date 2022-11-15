@@ -1,6 +1,5 @@
 package controller.supermercado;
 
-import controller.LoginController;
 import controller.StageController;
 import java.io.IOException;
 import java.net.URL;
@@ -10,11 +9,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import model.User;
+import principal.Principal;
 
 public class TelaAdminController implements Initializable {
 
     @FXML
     private Label logado;
+
+    private User loggedUser = Principal.supermarketData.getLoggedUser();
 
     @FXML
     public void abrirMensagens() throws IOException {
@@ -66,7 +69,7 @@ public class TelaAdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        logado.setText("Você está logado como " + LoginController.uN.getName());
+        logado.setText("Você está logado como " + loggedUser.getName());
     }
 
 }

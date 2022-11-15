@@ -1,8 +1,6 @@
 package controller.usuario;
 
-import controller.LoginController;
 import controller.StageController;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +13,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import model.Cliente;
 import model.Pedidos;
+import principal.Principal;
 
 public class ConfirmarPedidoController implements Initializable {
 
@@ -23,7 +22,7 @@ public class ConfirmarPedidoController implements Initializable {
     private TextField rua, num, bairro, ref, complemento;
 
     // variavel que receberá usuario que está logado
-    Cliente loggedClient = (Cliente) LoginController.uN;
+    private Cliente loggedUser = (Cliente) Principal.supermarketData.getLoggedUser();
 
     // Confirma o pedido feito pelo cliente
     @FXML
@@ -33,7 +32,7 @@ public class ConfirmarPedidoController implements Initializable {
                 + "\n" + ref.getText();
 
         // criar novo pedido
-        new Pedidos((Cliente) LoginController.uN, endereco);
+        new Pedidos(loggedUser, endereco);
 
         // Notificacao n = new Notificacao("Pedido para ser confirmado", admin);
 
@@ -46,15 +45,15 @@ public class ConfirmarPedidoController implements Initializable {
         confirmacao.showAndWait();
 
         // limpa o carrinho do usuario
-        ((Cliente) LoginController.uN).getCart().getProdutosSolicitados().clear();
+        (loggedUser).getCart().getProdutosSolicitados().clear();
 
         // Salvar os dados residenciais escolhido pelo cliente
 
-        loggedClient.setLogradouro(rua.getText());
-        loggedClient.setNumeroCasa(num.getText());
-        loggedClient.setBairro(bairro.getText());
-        loggedClient.setPontoReferencia(ref.getText());
-        loggedClient.setComplemento(complemento.getText());
+        loggedUser.setLogradouro(rua.getText());
+        loggedUser.setNumeroCasa(num.getText());
+        loggedUser.setBairro(bairro.getText());
+        loggedUser.setPontoReferencia(ref.getText());
+        loggedUser.setComplemento(complemento.getText());
 
         // volta para tela principal do usuario
         StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
@@ -76,11 +75,11 @@ public class ConfirmarPedidoController implements Initializable {
 
     // carrega os dados residenciais salvos pelo cliente
     public void carregarEndereco() {
-        rua.setText(loggedClient.getLogradouro());
-        num.setText(loggedClient.getNumeroCasa());
-        bairro.setText(loggedClient.getBairro());
-        ref.setText(loggedClient.getPontoReferencia());
-        complemento.setText(loggedClient.getComplemento());
+        rua.setText(loggedUser.getLogradouro());
+        num.setText(loggedUser.getNumeroCasa());
+        bairro.setText(loggedUser.getBairro());
+        ref.setText(loggedUser.getPontoReferencia());
+        complemento.setText(loggedUser.getComplemento());
     }
 
 }

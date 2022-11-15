@@ -1,8 +1,6 @@
 package controller.usuario;
 
-import controller.LoginController;
 import controller.StageController;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import model.Cliente;
 import model.Produto;
+import principal.Principal;
 
 public class VerCarrinhoController implements Initializable {
 
@@ -33,6 +32,7 @@ public class VerCarrinhoController implements Initializable {
     private TableColumn<Produto, Double> valor = new TableColumn<>();
 
     private ObservableList<Produto> observable;
+    private Cliente loggedUser = (Cliente) Principal.supermarketData.getLoggedUser();
 
     @FXML
     public void voltar(ActionEvent event) throws IOException {
@@ -50,9 +50,9 @@ public class VerCarrinhoController implements Initializable {
     public void remover(ActionEvent event) {
         Produto selectedItem = tabela.getSelectionModel().getSelectedItem();
 
-        for (Produto p : ((Cliente) LoginController.uN).getCart().getProdutosSolicitados()) {
+        for (Produto p : (loggedUser).getCart().getProdutosSolicitados()) {
             if (selectedItem.equals(p)) {
-                ((Cliente) LoginController.uN).getCart().getProdutosSolicitados().remove(p);
+                (loggedUser).getCart().getProdutosSolicitados().remove(p);
                 break;
             }
         }
@@ -71,7 +71,7 @@ public class VerCarrinhoController implements Initializable {
 
     public void carregarTabela() {
         observable = FXCollections
-                .observableArrayList(((Cliente) LoginController.uN).getCart().getProdutosSolicitados());
+                .observableArrayList((loggedUser).getCart().getProdutosSolicitados());
 
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         imagem.setCellValueFactory(new PropertyValueFactory<>("imagem"));

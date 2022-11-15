@@ -1,6 +1,5 @@
 package controller.usuario;
 
-import controller.LoginController;
 import controller.StageController;
 import controller.supermercado.CadastroController;
 import java.awt.image.BufferedImage;
@@ -42,12 +41,12 @@ public class EditarPerfilClienteController implements Initializable {
     @FXML
     private Label erroNome, erroNomeUsuario, erroSenha, erroEmail, erroCpf;
 
-    Cliente cliente = (Cliente) LoginController.uN;
+    private Cliente loggedUser = (Cliente) Principal.supermarketData.getLoggedUser();
 
     // Declaração do selecionador de arquivo
     FileChooser fc = new FileChooser();
     // Declaração e inicialização do arquivo onde irá receber o arquivo selecionado
-    File arquivoImagem = new File(cliente.getUrlImagem());
+    File arquivoImagem = new File(loggedUser.getUrlImagem());
 
     ;
 
@@ -58,7 +57,7 @@ public class EditarPerfilClienteController implements Initializable {
         arquivoImagem = fc.showOpenDialog(null);
 
         if (arquivoImagem == null) {
-            arquivoImagem = new File(cliente.getUrlImagem());
+            arquivoImagem = new File(loggedUser.getUrlImagem());
             return;
         }
 
@@ -75,13 +74,13 @@ public class EditarPerfilClienteController implements Initializable {
 
     @FXML
     public void confirmar(ActionEvent event) throws IOException {
-        cliente.setName(nome.getText());
-        cliente.setUsername(nomeUsuario.getText());
-        cliente.setCpf(cpf.getText());
-        cliente.setEmail(email.getText());
-        cliente.setPassword(senha.getText());
+        loggedUser.setName(nome.getText());
+        loggedUser.setUsername(nomeUsuario.getText());
+        loggedUser.setCpf(cpf.getText());
+        loggedUser.setEmail(email.getText());
+        loggedUser.setPassword(senha.getText());
         if (arquivoImagem != null) {
-            cliente.setImagem(arquivoImagem);
+            loggedUser.setImagem(arquivoImagem);
         }
 
         Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
@@ -217,10 +216,10 @@ public class EditarPerfilClienteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        nome.setText(cliente.getName());
-        nomeUsuario.setText(cliente.getUsername());
-        cpf.setText(cliente.getCpf());
-        email.setText(cliente.getEmail());
-        imagem.setImage(cliente.getImagem().getImage());
+        nome.setText(loggedUser.getName());
+        nomeUsuario.setText(loggedUser.getUsername());
+        cpf.setText(loggedUser.getCpf());
+        email.setText(loggedUser.getEmail());
+        imagem.setImage(loggedUser.getImagem().getImage());
     }
 }
