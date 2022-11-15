@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import principal.Principal;
 
 public class Mensagem implements Serializable {
     // ATRIBUTOS
@@ -23,7 +24,7 @@ public class Mensagem implements Serializable {
         remetente.setUltimaMensagem(horario);
         destinatario.setUltimaMensagem(horario);
         new Notification("Mensagem de " + remetente, destinatario);
-        Supermercado.getMensagens().add(this);
+        Principal.supermarketData.addMessage(this);
     }
 
     // GETES E SETES

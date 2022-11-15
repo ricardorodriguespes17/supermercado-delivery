@@ -4,7 +4,6 @@ package controller.supermercado;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import controller.StageController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,8 +15,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import model.Supermercado;
 import model.Usuario;
+import principal.Principal;
 
 public class ListaUsuarioController implements Initializable {
 
@@ -47,7 +46,7 @@ public class ListaUsuarioController implements Initializable {
 
     // Carrega a TableView com os dados dos usuários
     public void carregarTabela() {
-        observable = FXCollections.observableArrayList(Supermercado.getUsers());
+        observable = FXCollections.observableArrayList(Principal.supermarketData.getUsers());
 
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         imagem.setCellValueFactory(new PropertyValueFactory<>("imagem"));

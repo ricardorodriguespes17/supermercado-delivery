@@ -2,7 +2,6 @@ package controller.usuario;
 
 import controller.LoginController;
 import controller.StageController;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import model.Produto;
-import model.Supermercado;
+import principal.Principal;
 
 public class VerProdutoController implements Initializable {
 
@@ -81,7 +80,7 @@ public class VerProdutoController implements Initializable {
         carregarTabela();
         String pesquisa = caixaPesquisa.getText();
 
-        for (Produto p : Supermercado.getProdutos()) {
+        for (Produto p : Principal.supermarketData.getProducts()) {
             for (int i = 0; i < pesquisa.length(); i++) {
                 if (p.getNomeProduto().charAt(i) != pesquisa.charAt(i)) {
                     tabela.getItems().remove(p);
@@ -96,7 +95,7 @@ public class VerProdutoController implements Initializable {
     }
 
     public void carregarTabela() {
-        observable = FXCollections.observableArrayList(Supermercado.getProdutos());
+        observable = FXCollections.observableArrayList(Principal.supermarketData.getProducts());
 
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         imagem.setCellValueFactory(new PropertyValueFactory<>("imagem"));
@@ -112,7 +111,7 @@ public class VerProdutoController implements Initializable {
         tabela.getSelectionModel().selectFirst();
 
         // Remover itens que tiverem quantidade igual a 0
-        for (Produto p : Supermercado.getProdutos()) {
+        for (Produto p : Principal.supermarketData.getProducts()) {
             if (p.getQuant() == 0) {
                 tabela.getItems().remove(p);
             }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
-
 import controller.StageController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Pedidos;
 import model.Produto;
-import model.Supermercado;
+import principal.Principal;
 
 public class EntregasController implements Initializable {
 
@@ -46,10 +45,10 @@ public class EntregasController implements Initializable {
         }
 
         // ordena a lista de produtos
-        Collections.sort(Supermercado.getProdutos());
+        Collections.sort(Principal.supermarketData.getProducts());
 
         selectedItem.getProdutosPedidos().clear();
-        Supermercado.getPedidos().remove(selectedItem);
+        Principal.supermarketData.getOrders().remove(selectedItem);
 
         // Atualizar os itens da tabela
         carregarTabela();
@@ -67,7 +66,7 @@ public class EntregasController implements Initializable {
 
         StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
         StageController.openScreen();
-        Supermercado.getPedidos().remove(selectedItem);
+        Principal.supermarketData.getOrders().remove(selectedItem);
     }
 
     @FXML
@@ -83,7 +82,7 @@ public class EntregasController implements Initializable {
 
     // Carrega os dados da tabela de entregas
     public void carregarTabela() {
-        observable = FXCollections.observableArrayList(Supermercado.getPedidos());
+        observable = FXCollections.observableArrayList(Principal.supermarketData.getOrders());
 
         endereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
         solicitado.setCellValueFactory(new PropertyValueFactory<>("usuario"));
@@ -94,7 +93,7 @@ public class EntregasController implements Initializable {
         // Formatando fonte da tabela
         tabela.setStyle("-fx-font-size: 12px; -fx-font-family: Source Sans Pro Extra Light;");
 
-        for (Pedidos p : Supermercado.getPedidos()) {
+        for (Pedidos p : Principal.supermarketData.getOrders()) {
             if (!p.isConfirmado()) {
                 tabela.getItems().remove(p);
             }

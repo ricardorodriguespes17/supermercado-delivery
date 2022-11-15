@@ -18,7 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import model.Produto;
-import model.Supermercado;
+import principal.Principal;
 
 public class ListaProdutoController implements Initializable {
 
@@ -47,11 +47,11 @@ public class ListaProdutoController implements Initializable {
         Produto selectedItem = tabela.getSelectionModel().getSelectedItem();
         tabela.getItems().remove(selectedItem);
 
-        for (Produto p : Supermercado.getProdutos()) {
+        for (Produto p : Principal.supermarketData.getProducts()) {
             if (p.getCod() == cod.getCellData(selectedItem)) {
                 File imagemProdutoRemovido = new File(p.getUrlImagem());
                 imagemProdutoRemovido.delete();
-                Supermercado.getProdutos().remove(p);
+                Principal.supermarketData.getProducts().remove(p);
                 break;
             }
         }
@@ -83,7 +83,7 @@ public class ListaProdutoController implements Initializable {
         carregarTabela();
         String pesquisa = caixaPesquisa.getText();
 
-        for (Produto p : Supermercado.getProdutos()) {
+        for (Produto p : Principal.supermarketData.getProducts()) {
             for (int i = 0; i < pesquisa.length(); i++) {
                 if (p.getNomeProduto().charAt(i) != pesquisa.charAt(i)) {
                     tabela.getItems().remove(p);
@@ -98,7 +98,7 @@ public class ListaProdutoController implements Initializable {
     }
 
     public void carregarTabela() {
-        observable = FXCollections.observableArrayList(Supermercado.getProdutos());
+        observable = FXCollections.observableArrayList(Principal.supermarketData.getProducts());
 
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         imagem.setCellValueFactory(new PropertyValueFactory<>("imagem"));

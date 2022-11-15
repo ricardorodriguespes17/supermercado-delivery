@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.Date;
 
+import principal.Principal;
+
 public class Usuario implements Serializable, Comparable<Usuario> {
     private String userName;
     private String nome;
@@ -22,9 +24,8 @@ public class Usuario implements Serializable, Comparable<Usuario> {
         this.userName = userName;
         this.senha = senha;
         this.tipo = tipo;
-        this.cart = new Cart();
         ultimaMensagem = new Date();
-        Supermercado.getUsers().add(this);
+        Principal.supermarketData.getUsers().add(this);
     }
 
     public final void copia(File fonte, File destino) throws IOException {

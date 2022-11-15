@@ -10,6 +10,7 @@ import model.Usuario;
 public class Principal extends Application {
 
     public static Stage palco = new Stage();
+    public static Supermercado supermarketData = new Supermercado();
 
     @Override
     public void start(Stage palco) throws Exception {
@@ -18,15 +19,15 @@ public class Principal extends Application {
     }
 
     public static void main(String[] args) {
-        Supermercado.carregarDados();
+        supermarketData.loadDatas();
         criarAdmin();
         launch(args);
-        Supermercado.gravarDados();
+        supermarketData.saveDatas();
     }
 
     public static void criarAdmin() {
         int i = 0;
-        for (Usuario u : Supermercado.getUsers()) {
+        for (Usuario u : supermarketData.getUsers()) {
             if (u.getNome().equals("Administrador")) {
                 i++;
                 break;

@@ -1,17 +1,12 @@
 package model;
 
 import controller.LoginController;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import principal.Principal;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Pedidos implements Serializable {
     // ATRIBUTOS
@@ -46,26 +41,7 @@ public class Pedidos implements Serializable {
         this.valorPedidos = c.getValor();
         this.usuario = usuario;
         this.dataHora = formatoHora.format(dh) + " - " + formatoData.format(dh);
-        Supermercado.getPedidos().add(this);
-        gravarDados();
-    }
-
-    public final void gravarDados() {
-        try {
-            // Salvando todos pedidos em um arquivo
-            FileOutputStream pedidosBase = new FileOutputStream("src/arquivos/pedidosbase.dat");
-            ObjectOutputStream objectPedidos = new ObjectOutputStream(pedidosBase);
-            objectPedidos.writeObject(Supermercado.getPedidos());
-            objectPedidos.flush();
-            objectPedidos.close();
-            pedidosBase.flush();
-            pedidosBase.close();
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Principal.supermarketData.addOrder(this);
     }
 
     // METODOS

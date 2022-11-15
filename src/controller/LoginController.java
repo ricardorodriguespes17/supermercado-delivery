@@ -1,6 +1,5 @@
 package controller;
 
-import principal.Principal;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,8 +14,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import model.Supermercado;
 import model.Usuario;
+import principal.Principal;
 
 public class LoginController implements Initializable {
 
@@ -30,7 +29,7 @@ public class LoginController implements Initializable {
     public static Usuario uN;
 
     public void acceptLogin(String type, String userName) {
-        for (Usuario user : Supermercado.getUsers()) {
+        for (Usuario user : Principal.supermarketData.getUsers()) {
             if (userName.equals(user.getUserName())) {
                 uN = user;
             }
@@ -74,7 +73,7 @@ public class LoginController implements Initializable {
             return;
         }
 
-        for (Usuario user : Supermercado.getUsers()) {
+        for (Usuario user : Principal.supermarketData.getUsers()) {
             if (user.getUserName().equals(usernameText)) {
                 if (user.getSenha().equals(passwordText)) {
                     acceptLogin(user.getTipo(), user.getUserName());

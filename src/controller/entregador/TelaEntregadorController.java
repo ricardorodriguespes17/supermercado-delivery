@@ -31,11 +31,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javax.imageio.ImageIO;
-
 import model.Entregador;
 import model.Notification;
-import model.Supermercado;
 import model.Usuario;
+import principal.Principal;
 
 public class TelaEntregadorController implements Initializable {
 
@@ -87,9 +86,9 @@ public class TelaEntregadorController implements Initializable {
         StageController.root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         StageController.openScreen();
 
-        for (Usuario u : Supermercado.getUsers()) {
+        for (Usuario u : Principal.supermarketData.getUsers()) {
             if (u.getNome().equals(LoginController.uN.getNome())) {
-                Supermercado.getUsers().remove(u);
+                Principal.supermarketData.getUsers().remove(u);
                 break;
             }
         }

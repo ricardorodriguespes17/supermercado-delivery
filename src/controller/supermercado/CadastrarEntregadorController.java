@@ -23,8 +23,8 @@ import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import controller.StageController;
 import model.Entregador;
-import model.Supermercado;
 import model.Usuario;
+import principal.Principal;
 
 public class CadastrarEntregadorController implements Initializable {
 
@@ -103,7 +103,7 @@ public class CadastrarEntregadorController implements Initializable {
 
     @FXML
     public void verificaNomeUsuario(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
+        for (Usuario u : Principal.supermarketData.getUsers()) {
             if (u.getUserName().equals(nomeUsuario.getText())) {
                 erroNomeUsuario.setVisible(true);
                 erroNomeUsuario.setText("Nome de Usuário já existe");
@@ -129,7 +129,7 @@ public class CadastrarEntregadorController implements Initializable {
 
     @FXML
     public void verificaCpf(KeyEvent event) {
-        for (Entregador e : Supermercado.getEntregadores()) {
+        for (Entregador e : Principal.supermarketData.getDeliveryPeoples()) {
             if (e.getCpf() == null) {
                 return;
             }
@@ -164,7 +164,7 @@ public class CadastrarEntregadorController implements Initializable {
 
     @FXML
     public void verificaEmail(KeyEvent event) {
-        for (Entregador e : Supermercado.getEntregadores()) {
+        for (Entregador e : Principal.supermarketData.getDeliveryPeoples()) {
             if (e.getEmail() == null) {
                 return;
             }

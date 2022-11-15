@@ -2,9 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,8 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,8 +20,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import model.Mensagem;
-import model.Supermercado;
 import model.Usuario;
+import principal.Principal;
 
 public class MensagensController implements Initializable {
 
@@ -119,44 +115,13 @@ public class MensagensController implements Initializable {
     public void abrirTopico(MouseEvent event) {
         Usuario u = topicos.getSelectionModel().getSelectedItem();
         mensagens.setText(u.getNome());
-        for (Mensagem m : Supermercado.getMensagens()) {
+        for (Mensagem m : Principal.supermarketData.getMessages()) {
             if (m.getDestinatario().equals(u)) {
                 m.setVisto(true);
             }
         }
 
         carregarMensagens();
-    }
-
-    @FXML
-    public void excluir(ActionEvent event) {
-        List<Mensagem> msg = new ArrayList<>();
-        for (Mensagem m : Supermercado.getMensagens()) {
-            if (m.getRemetente().getUserName().equals(LoginController.uN.getUserName())
-                    || m.getDestinatario().getUserName().equals(LoginController.uN.getUserName())) {
-
-                // adicionando as mensagens que serao excluidas
-                msg.add(m);
-
-                // removendo as mensagens da conversa
-                conversa.getItems().remove(m);
-
-                if (Supermercado.getMensagens().isEmpty()) {
-                    return;
-                }
-            }
-        }
-
-        for (Mensagem m : msg) {
-            Supermercado.getMensagens().remove(m);
-        }
-
-        Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
-        confirmacao.setTitle("Exclusão de conversas");
-        confirmacao.setHeaderText("");
-        confirmacao.setContentText("Mensagens exlcuidas com sucesso");
-        confirmacao.setResult(ButtonType.OK);
-        confirmacao.showAndWait();
     }
 
     @FXML
@@ -172,7 +137,7 @@ public class MensagensController implements Initializable {
 
     public void carregarTopicos() {
         // carregar lista para a tabela
-        observableUsuario = FXCollections.observableArrayList(Supermercado.getUsers());
+        observableUsuario = FXCollections.observableArrayList(Principal.supermarketData.getUsers());
 
         Collections.sort(observableUsuario);
 
@@ -194,7 +159,7 @@ public class MensagensController implements Initializable {
         carregarMensagens();
 
         // Tirar as mensagens de outros usuarios da tabela de mensagens
-        for (Usuario u : Supermercado.getUsers()) {
+        for (Usuario u : Principal.supermarketData.getUsers()) {
             if (LoginController.uN.getUserName().equals("admin")) {
                 if (u.getUserName().equals("admin") || u.getTipo().equals("entregador")) {
                     topicos.getItems().remove(u);
@@ -209,7 +174,7 @@ public class MensagensController implements Initializable {
     }
 
     public void carregarMensagens() {
-        observableMensagem = FXCollections.observableArrayList(Supermercado.getMensagens());
+        observableMensagem = FXCollections.observableArrayList(Principal.supermarketData.getMessages());
 
         mensagens.setCellValueFactory(new PropertyValueFactory<>("m1"));
         conversa.setItems(observableMensagem);
@@ -221,7 +186,7 @@ public class MensagensController implements Initializable {
         Usuario u = topicos.getSelectionModel().getSelectedItem();
         Usuario a = LoginController.uN;
 
-        for (Mensagem m : Supermercado.getMensagens()) {
+        for (Mensagem m : Principal.supermarketData.getMessages()) {
             if (a.getUserName().equals("admin")) {
                 if (m.getDestinatario().getNome().equals(u.getNome())
                         || m.getRemetente().getNome().equals(u.getNome())) {

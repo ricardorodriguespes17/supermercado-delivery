@@ -25,9 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
-
 import model.Cliente;
-import model.Supermercado;
 import model.Usuario;
 import principal.Principal;
 
@@ -132,7 +130,7 @@ public class CriarContaController implements Initializable {
 
     @FXML
     public void verificaNomeUsuario(KeyEvent event) {
-        for (Usuario u : Supermercado.getUsers()) {
+        for (Usuario u : Principal.supermarketData.getUsers()) {
             if (u.getUserName().equals(nomeUsuario.getText())) {
                 erroNomeUsuario.setVisible(true);
                 erroNomeUsuario.setText("Nome de Usuário já existe");
@@ -155,7 +153,7 @@ public class CriarContaController implements Initializable {
 
     @FXML
     public void verificaCpf(KeyEvent event) {
-        for (Cliente u : Supermercado.getClientes()) {
+        for (Cliente u : Principal.supermarketData.getClients()) {
             if (u.getCpf() == null) {
                 return;
             }
@@ -186,7 +184,7 @@ public class CriarContaController implements Initializable {
 
     @FXML
     public void verificaEmail(KeyEvent event) {
-        for (Cliente c : Supermercado.getClientes()) {
+        for (Cliente c : Principal.supermarketData.getClients()) {
             if (c.getEmail() == null) {
                 return;
             }

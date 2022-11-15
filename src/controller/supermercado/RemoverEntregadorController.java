@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import controller.StageController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,8 +18,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import model.Entregador;
-import model.Supermercado;
 import model.Usuario;
+import principal.Principal;
 
 public class RemoverEntregadorController implements Initializable {
 
@@ -46,11 +45,11 @@ public class RemoverEntregadorController implements Initializable {
         Entregador selectedItem = tabela.getSelectionModel().getSelectedItem();
         tabela.getItems().remove(selectedItem);
 
-        for (Entregador e : Supermercado.getEntregadores()) {
+        for (Entregador e : Principal.supermarketData.getDeliveryPeoples()) {
             if (e.getCpf().equals(selectedItem.getCpf())) {
                 File imagemProdutoRemovido = new File(e.getUrlImagem());
                 imagemProdutoRemovido.delete();
-                Supermercado.getEntregadores().remove(e);
+                Principal.supermarketData.getDeliveryPeoples().remove(e);
 
                 Alert confirmacao = new Alert(Alert.AlertType.INFORMATION);
                 confirmacao.setTitle("Remoção");
@@ -77,7 +76,7 @@ public class RemoverEntregadorController implements Initializable {
 
     // Carrega a TableView com os dados dos usuários
     public void carregarTabela() {
-        observable = FXCollections.observableArrayList(Supermercado.getEntregadores());
+        observable = FXCollections.observableArrayList(Principal.supermarketData.getDeliveryPeoples());
 
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         imagem.setCellValueFactory(new PropertyValueFactory<>("imagem"));
@@ -90,7 +89,7 @@ public class RemoverEntregadorController implements Initializable {
         // Selecionando primeiro item da tabela ao iniciar
         tabela.getSelectionModel().selectFirst();
 
-        for (Usuario u : Supermercado.getUsers()) {
+        for (Usuario u : Principal.supermarketData.getUsers()) {
             if (!"entregador".equals(u.getTipo())) {
                 tabela.getItems().remove(u);
             }

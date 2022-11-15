@@ -1,112 +1,87 @@
 package model;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import data.ClientsData;
+import data.DeliveryPeoplesData;
+import data.MessagesData;
+import data.OrdersData;
+import data.ProductsData;
+import data.UsersData;
 
 public class Supermercado implements Serializable {
 
-    private static List<Produto> produts = new ArrayList<>();
-    private static List<Usuario> users = new ArrayList<>();
-    private static List<Cliente> clients = new ArrayList<>();
-    private static List<Entregador> deliveryPeoples = new ArrayList<>();
-    private static List<Pedidos> orders = new ArrayList<>();
-    private static List<Mensagem> messages = new ArrayList<>();
+    private UsersData usersData = new UsersData("users");
+    private ClientsData clientsData = new ClientsData("clients");
+    private DeliveryPeoplesData deliveryPeopleData = new DeliveryPeoplesData("delivery-peoples");
+    private ProductsData productsData = new ProductsData("products");
+    private OrdersData ordersData = new OrdersData("orders");
+    private MessagesData messagesData = new MessagesData("messages");
 
-    private static void saveData(String fileName, Object object) {
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream("src/arquivos/" + fileName + ".dat");
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(object);
-            objectOutputStream.flush();
-            objectOutputStream.close();
-            fileOutputStream.flush();
-            fileOutputStream.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void saveDatas() {
+        usersData.saveData();
+        clientsData.saveData();
+        deliveryPeopleData.saveData();
+        productsData.saveData();
+        ordersData.saveData();
+        messagesData.saveData();
     }
 
-    private static Object loadData(String fileName) {
-        ArrayList<Object> data = new ArrayList<>();
-
-        try {
-            FileInputStream fileInputStream = new FileInputStream("src/arquivos/" + fileName + ".dat");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            data = (ArrayList<Object>) objectInputStream.readObject();
-            objectInputStream.close();
-            fileInputStream.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Supermercado.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Supermercado.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return data;
+    public void loadDatas() {
+        usersData.loadData();
+        clientsData.loadData();
+        deliveryPeopleData.loadData();
+        productsData.loadData();
+        ordersData.loadData();
+        messagesData.loadData();
     }
 
-    public static void gravarDados() {
-        saveData("usersBase", users);
-        saveData("clientsBase", clients);
-        saveData("deliveryPeopleBase", deliveryPeoples);
-        saveData("produtsBase", produts);
-        saveData("ordersBase", orders);
-        saveData("messagesBase", messages);
+    public List<Usuario> getUsers() {
+        return usersData.getData();
     }
 
-    public static void carregarDados() {
-        users = (List<Usuario>) loadData("usersBase");
-        clients = (List<Cliente>) loadData("clientsBase");
-        deliveryPeoples = (List<Entregador>) loadData("deliveryPeopleBase");
-        produts = (List<Produto>) loadData("produtsBase");
-        orders = (List<Pedidos>) loadData("ordersBase");
-        messages = (List<Mensagem>) loadData("messagesBase");
+    public List<Produto> getProducts() {
+        return productsData.getData();
     }
 
-    public static List<Produto> getProdutos() {
-        return produts;
+    public List<Cliente> getClients() {
+        return clientsData.getData();
     }
 
-    public static void setProdutos(List<Produto> produts) {
-        Supermercado.produts = produts;
+    public List<Entregador> getDeliveryPeoples() {
+        return deliveryPeopleData.getData();
     }
 
-    public static List<Usuario> getUsers() {
-        return users;
+    public List<Pedidos> getOrders() {
+        return ordersData.getData();
     }
 
-    public static List<Cliente> getClientes() {
-        return clients;
+    public List<Mensagem> getMessages() {
+        return messagesData.getData();
     }
 
-    public static List<Entregador> getEntregadores() {
-        return deliveryPeoples;
+    public void addUser(Usuario newUser) {
+        usersData.addData(newUser);
     }
 
-    public static List<Pedidos> getPedidos() {
-        return orders;
+    public void addClient(Cliente newUser) {
+        clientsData.addData(newUser);
     }
 
-    public void setPedidos(List<Pedidos> orders) {
-        Supermercado.orders = orders;
+    public void addDeliveryPeople(Entregador newUser) {
+        deliveryPeopleData.addData(newUser);
     }
 
-    public static List<Mensagem> getMensagens() {
-        return messages;
+    public void addProduct(Produto newUser) {
+        productsData.addData(newUser);
     }
 
-    public void setMensagens(List<Mensagem> messages) {
-        Supermercado.messages = messages;
+    public void addOrder(Pedidos newUser) {
+        ordersData.addData(newUser);
+    }
+
+    public void addMessage(Mensagem newUser) {
+        messagesData.addData(newUser);
     }
 
 }

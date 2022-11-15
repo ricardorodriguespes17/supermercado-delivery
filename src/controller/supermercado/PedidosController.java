@@ -3,7 +3,6 @@ package controller.supermercado;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import controller.StageController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,8 +17,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Notification;
 import model.Pedidos;
-import model.Supermercado;
 import model.Usuario;
+import principal.Principal;
 
 public class PedidosController implements Initializable {
 
@@ -53,7 +52,7 @@ public class PedidosController implements Initializable {
 
         // Mandar notificação para o usuario
         new Notification("Pedido confirmado", selectedItem.getUser());
-        for (Usuario u : Supermercado.getUsers()) {
+        for (Usuario u : Principal.supermarketData.getUsers()) {
             if ("entregador".equals(u.getTipo())) {
                 // Notificacao notificarEntregador = new Notificacao("Um pedido para ser
                 // entregue", u);
@@ -75,7 +74,7 @@ public class PedidosController implements Initializable {
     @FXML
     public void cancelar(ActionEvent event) {
         Pedidos selectedItem = tabela.getSelectionModel().getSelectedItem();
-        for (Usuario u : Supermercado.getUsers()) {
+        for (Usuario u : Principal.supermarketData.getUsers()) {
             if (u.getNome().equals(selectedItem.getUsuario())) {
                 u.getCarrinho().getProdutosSolicitados().clear();
             }
@@ -92,7 +91,7 @@ public class PedidosController implements Initializable {
         confirmacao.showAndWait();
 
         tabela.getItems().remove(selectedItem);
-        Supermercado.getPedidos().remove(selectedItem);
+        Principal.supermarketData.getOrders().remove(selectedItem);
         carregarTabela();
     }
 
@@ -102,7 +101,7 @@ public class PedidosController implements Initializable {
     }
 
     public void carregarTabela() {
-        observable = FXCollections.observableArrayList(Supermercado.getPedidos());
+        observable = FXCollections.observableArrayList(Principal.supermarketData.getOrders());
 
         nomeProdutos.setCellValueFactory(new PropertyValueFactory<>("nomeProdutos"));
         solicitado.setCellValueFactory(new PropertyValueFactory<>("usuario"));
@@ -113,7 +112,7 @@ public class PedidosController implements Initializable {
         // Formatando fonte da tabela
         tabela.setStyle("-fx-font-size: 12px; -fx-font-family: Source Sans Pro Extra Light;");
 
-        for (Pedidos p : Supermercado.getPedidos()) {
+        for (Pedidos p : Principal.supermarketData.getOrders()) {
             if (p.isConfirmado()) {
                 tabela.getItems().remove(p);
             }
