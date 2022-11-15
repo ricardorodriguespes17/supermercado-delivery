@@ -22,7 +22,7 @@ public class Mensagem implements Serializable {
         horario = new Date();
         remetente.setUltimaMensagem(horario);
         destinatario.setUltimaMensagem(horario);
-        new Notificacao("Mensagem de " + remetente, destinatario);
+        new Notification("Mensagem de " + remetente, destinatario);
         Supermercado.getMensagens().add(this);
     }
 

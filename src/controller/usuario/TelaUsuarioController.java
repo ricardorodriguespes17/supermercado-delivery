@@ -27,7 +27,7 @@ import javafx.scene.shape.Rectangle;
 import javax.imageio.ImageIO;
 
 import model.Cliente;
-import model.Notificacao;
+import model.Notification;
 
 public class TelaUsuarioController implements Initializable {
 
@@ -41,9 +41,9 @@ public class TelaUsuarioController implements Initializable {
     private final MenuButton menu = new MenuButton();
 
     @FXML
-    private final TableView<Notificacao> not = new TableView<>();
+    private final TableView<Notification> not = new TableView<>();
     @FXML
-    private final TableColumn<Notificacao, String> info = new TableColumn<>();
+    private final TableColumn<Notification, String> info = new TableColumn<>();
 
     @FXML
     private ImageView iconeNot = new ImageView();

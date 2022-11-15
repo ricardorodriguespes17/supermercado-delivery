@@ -33,7 +33,7 @@ import javafx.scene.shape.Rectangle;
 import javax.imageio.ImageIO;
 
 import model.Entregador;
-import model.Notificacao;
+import model.Notification;
 import model.Supermercado;
 import model.Usuario;
 
@@ -48,15 +48,15 @@ public class TelaEntregadorController implements Initializable {
     private MenuButton menu = new MenuButton();
 
     @FXML
-    private TableView<Notificacao> not = new TableView<>();
+    private TableView<Notification> not = new TableView<>();
     @FXML
-    private TableColumn<Notificacao, String> info = new TableColumn<>();
+    private TableColumn<Notification, String> info = new TableColumn<>();
 
     @FXML
     private ImageView iconeNot = new ImageView();
 
     private Entregador loggedUser = (Entregador) LoginController.uN;
-    private ObservableList<Notificacao> obs;
+    private ObservableList<Notification> obs;
 
     @FXML
     public void notificacaoPedido(ActionEvent event) throws IOException {
@@ -117,7 +117,7 @@ public class TelaEntregadorController implements Initializable {
         info.setCellValueFactory(new PropertyValueFactory<>("info"));
         not.setItems(obs);
 
-        for (Notificacao n : not.getItems()) {
+        for (Notification n : not.getItems()) {
             if (n.isVisto()) {
                 FileInputStream fis = new FileInputStream("src/imagens/notificacao_inativa.png");
                 Image image = new Image(fis);

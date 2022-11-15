@@ -16,7 +16,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Notificacao;
+import model.Notification;
 import model.Pedidos;
 import model.Supermercado;
 import model.Usuario;
@@ -52,7 +52,7 @@ public class PedidosController implements Initializable {
         }
 
         // Mandar notificação para o usuario
-        new Notificacao("Pedido confirmado", selectedItem.getUser());
+        new Notification("Pedido confirmado", selectedItem.getUser());
         for (Usuario u : Supermercado.getUsers()) {
             if ("entregador".equals(u.getTipo())) {
                 // Notificacao notificarEntregador = new Notificacao("Um pedido para ser
