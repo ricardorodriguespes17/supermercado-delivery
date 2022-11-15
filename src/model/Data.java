@@ -1,4 +1,4 @@
-package data;
+package model;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,19 +7,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Data<E> implements Serializable {
 
     private String fileName;
-    private List<E> data;
+    private E data;
 
-    public Data(String fileName) {
+    public Data(String fileName, E data) {
         this.fileName = fileName;
-        this.data = new ArrayList<>();
+        this.data = data;
         loadData();
     }
 
@@ -43,7 +41,7 @@ public class Data<E> implements Serializable {
         try {
             FileInputStream fileInputStream = new FileInputStream("src/database/" + fileName + ".dat");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            data = (ArrayList<E>) objectInputStream.readObject();
+            data = (E) objectInputStream.readObject();
             objectInputStream.close();
             fileInputStream.close();
         } catch (IOException ex) {
@@ -53,12 +51,12 @@ public class Data<E> implements Serializable {
         }
     }
 
-    public List<E> getData() {
+    public E getData() {
         return data;
     }
 
-    public void addData(E newData) {
-        data.add(newData);
+    public void setData(E data) {
+        this.data = data;
         saveData();
     }
 

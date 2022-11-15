@@ -1,36 +1,40 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import data.ClientsData;
-import data.DeliveryPeoplesData;
-import data.MessagesData;
-import data.OrdersData;
-import data.ProductsData;
-import data.UsersData;
 
 public class Supermercado implements Serializable {
 
-    private User loggedUser;
-
-    private UsersData usersData = new UsersData("users");
-    private ClientsData clientsData = new ClientsData("clients");
-    private DeliveryPeoplesData deliveryPeopleData = new DeliveryPeoplesData("delivery-peoples");
-    private ProductsData productsData = new ProductsData("products");
-    private OrdersData ordersData = new OrdersData("orders");
-    private MessagesData messagesData = new MessagesData("messages");
+    private Data<User> loggedUserData;
+    private Data<List<User>> usersData;
+    private Data<List<Cliente>> clientsData;
+    private Data<List<Entregador>> deliveryPeopleData;
+    private Data<List<Produto>> productsData;
+    private Data<List<Pedidos>> ordersData;
+    private Data<List<Mensagem>> messagesData;
 
     public Supermercado() {
-        loggedUser = null;
+        loggedUserData = new Data<>("logged-user", null);
+        usersData = new Data<>("users", new ArrayList<>());
+        clientsData = new Data<>("clients", new ArrayList<>());
+        deliveryPeopleData = new Data<>("delivery-peoples", new ArrayList<>());
+        productsData = new Data<>("products", new ArrayList<>());
+        ordersData = new Data<>("orders", new ArrayList<>());
+        messagesData = new Data<>("messages", new ArrayList<>());
+
         loadDatas();
     }
 
     public User getLoggedUser() {
-        return loggedUser;
+        return loggedUserData.getData();
     }
 
-    public void setLoggedUser(User loggedUser) {
-        this.loggedUser = loggedUser;
+    public void logUser(User loggedUser, boolean saveData) {
+        loggedUserData.setData(loggedUser);
+        if (saveData) {
+            loggedUserData.saveData();
+        }
     }
 
     public void saveDatas() {
@@ -43,6 +47,7 @@ public class Supermercado implements Serializable {
     }
 
     public void loadDatas() {
+        loggedUserData.loadData();
         usersData.loadData();
         clientsData.loadData();
         deliveryPeopleData.loadData();
@@ -83,28 +88,28 @@ public class Supermercado implements Serializable {
         return messagesData.getData();
     }
 
-    public void addUser(User newUser) {
-        usersData.addData(newUser);
+    public void addUser(User data) {
+        usersData.getData().add(data);
     }
 
-    public void addClient(Cliente newUser) {
-        clientsData.addData(newUser);
+    public void addClient(Cliente data) {
+        clientsData.getData().add(data);
     }
 
-    public void addDeliveryPeople(Entregador newUser) {
-        deliveryPeopleData.addData(newUser);
+    public void addDeliveryPeople(Entregador data) {
+        deliveryPeopleData.getData().add(data);
     }
 
-    public void addProduct(Produto newUser) {
-        productsData.addData(newUser);
+    public void addProduct(Produto data) {
+        productsData.getData().add(data);
     }
 
-    public void addOrder(Pedidos newUser) {
-        ordersData.addData(newUser);
+    public void addOrder(Pedidos data) {
+        ordersData.getData().add(data);
     }
 
-    public void addMessage(Mensagem newUser) {
-        messagesData.addData(newUser);
+    public void addMessage(Mensagem data) {
+        messagesData.getData().add(data);
     }
 
 }

@@ -1,3 +1,9 @@
 .button-container {
   -fx-spacing: 10;
 }
+
+.stay-connected {
+  -fx-pref-width: 200;
+  -fx-font-size: 16;
+  -fx-margin: 10 0 0 0;
+}

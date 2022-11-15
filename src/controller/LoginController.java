@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,6 +26,8 @@ public class LoginController implements Initializable {
     private PasswordField password;
     @FXML
     private Label alert;
+    @FXML
+    private CheckBox stayConnectedSelection;
 
     @FXML
     public void enter() throws IOException, InterruptedException {
@@ -36,11 +39,8 @@ public class LoginController implements Initializable {
 
         for (User user : Principal.supermarketData.getUsers()) {
             if (user.getUsername().equals(usernameText) && user.getPassword().equals(passwordText)) {
-                try {
-                    acceptLogin(user.getType(), user.getUsername());
-                } catch (Exception e) {
-                    alert.setText("Erro ao fazer login");
-                }
+                boolean stayConnected = stayConnectedSelection.isSelected();
+                acceptLogin(user, stayConnected);
                 return;
             }
 
@@ -83,7 +83,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        Principal.supermarketData.logUser(null, true);
     }
 
     private void clearUsername() {
@@ -108,22 +108,23 @@ public class LoginController implements Initializable {
         return true;
     }
 
-    private void acceptLogin(String type, String userName) throws Exception {
-        for (User user : Principal.supermarketData.getUsers()) {
-            if (userName.equals(user.getUsername()))
-                Principal.supermarketData.setLoggedUser(user);
+    private void acceptLogin(User user, boolean stayConnected) {
+        Principal.supermarketData.logUser(user, stayConnected);
+
+        try {
+            if (user.getType().equals(User.TYPE_ADMIN))
+                StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
+
+            if (user.getType().equals(User.TYPE_CLIENT))
+                StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
+
+            if (user.getType().equals(User.TYPE_DELIVERY_PEOPLE))
+                StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
+
+            StageController.openScreen();
+        } catch (Exception e) {
+            alert.setText("Erro ao conectar usuário");
         }
-
-        if (type.equals(User.TYPE_ADMIN))
-            StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaAdmin.fxml"));
-
-        if (type.equals(User.TYPE_CLIENT))
-            StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaUsuario.fxml"));
-
-        if (type.equals(User.TYPE_DELIVERY_PEOPLE))
-            StageController.root = FXMLLoader.load(getClass().getResource("/view/TelaEntregador.fxml"));
-
-        StageController.openScreen();
     }
 
 }
