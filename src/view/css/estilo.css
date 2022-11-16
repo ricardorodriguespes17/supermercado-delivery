@@ -12,23 +12,22 @@ BorderPane{
     -fx-background-color: PRIMARY_COLOR;
     -fx-pref-width: 800;
     -fx-pref-height: 70;
-}
-
-.header HBox {
-    -fx-pref-width: 800;
     -fx-padding: 0 10 0 10;
+    -fx-spacing: 10;
 }
 
 .header Button {
-    -fx-min-width: 150;
+    -fx-min-width: 50;
     -fx-pref-height: 50;
     -fx-padding: 0 10 0 10;
     -fx-font-size: 20;
     -fx-text-fill: LABEL_COLOR;
+    -fx-background-color: transparent;
 }
 
 .header .title {
     -fx-font-size: 24;
+    -fx-pref-width: 800;
 }
 
 .content {

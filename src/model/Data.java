@@ -44,10 +44,8 @@ public class Data<E> implements Serializable {
             data = (E) objectInputStream.readObject();
             objectInputStream.close();
             fileInputStream.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.out.println("Arquivo não encontrado");
         }
     }
 

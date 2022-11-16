@@ -22,8 +22,6 @@ public class Supermercado implements Serializable {
         productsData = new Data<>("products", new ArrayList<>());
         ordersData = new Data<>("orders", new ArrayList<>());
         messagesData = new Data<>("messages", new ArrayList<>());
-
-        loadDatas();
     }
 
     public User getLoggedUser() {
@@ -58,7 +56,7 @@ public class Supermercado implements Serializable {
         createAdmin();
     }
 
-    public void createAdmin() {
+    private void createAdmin() {
         if (getUsers().size() == 0) {
             new User("Administrador", "admin", "admin", User.TYPE_ADMIN);
         }

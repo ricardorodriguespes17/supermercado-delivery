@@ -10,6 +10,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
+import principal.Principal;
 
 public class Cliente extends User {
   private String cpf;
@@ -19,7 +20,7 @@ public class Cliente extends User {
   private Cart cart;
 
   public Cliente(String name, String username, String password, String cpf, String email, File image) {
-    super(name, username, password, "cliente");
+    super(name, username, password, TYPE_CLIENT);
 
     File salvarImage = new File("src/imagens/usuarios/" + username + ".png");
     try {
@@ -33,6 +34,8 @@ public class Cliente extends User {
     this.endereco = new Endereco();
     this.urlImagem = salvarImage.toString();
     this.cart = new Cart(username);
+
+    Principal.supermarketData.addClient(this);
   }
 
   public String getCpf() {

@@ -1,0 +1,15 @@
+.box-input {
+  -fx-pref-width: 300;
+  -fx-margin: 10 0 0 0;
+}
+
+.box-input TextField, .box-input PasswordField {
+  -fx-pref-width: 300;
+  -fx-min-width: 300;
+  -fx-min-height: 30;
+  -fx-pref-height: 30;
+}
+
+.box-input .alert {
+  -fx-text-fill: #f00;
+}

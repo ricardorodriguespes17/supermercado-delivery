@@ -58,7 +58,7 @@ public class LoginController implements Initializable {
 
     @FXML
     public void createAccount(ActionEvent event) throws IOException {
-        StageController.root = FXMLLoader.load(getClass().getResource("/view/CriarConta.fxml"));
+        StageController.root = FXMLLoader.load(getClass().getResource("/view/CreateAccount.fxml"));
         StageController.openScreen();
     }
 
@@ -110,6 +110,9 @@ public class LoginController implements Initializable {
 
     private void acceptLogin(User user, boolean stayConnected) {
         Principal.supermarketData.logUser(user, stayConnected);
+
+        System.out.println(user.getName());
+        System.out.println(user.getType());
 
         try {
             if (user.getType().equals(User.TYPE_ADMIN))

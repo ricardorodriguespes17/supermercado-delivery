@@ -17,7 +17,7 @@ public class Entregador extends User {
   private String urlImagem;
 
   public Entregador(String name, String username, String password, String cpf, String email, File image) {
-    super(name, username, password, "entregador");
+    super(name, username, password, User.TYPE_DELIVERY_PEOPLE);
 
     File salvarImage = new File("src/imagens/usuarios/" + username + ".png");
     try {
